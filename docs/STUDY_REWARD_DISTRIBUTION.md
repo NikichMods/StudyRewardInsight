@@ -194,13 +194,13 @@ Blue especially has four well-separated practical groups:
 
 Collapsing blue to three bands would merge either the 15–30 group with 45–50, or the 45–50 group with 80+, losing a real distinction present in the vanilla data.
 
-## Working four-band candidate
+## Accepted four-band product model
 
-**Status: product candidate, not accepted behavior.**
+**Status: accepted product behavior for Study Reward Insight.**
 
 A four-tier vocabulary can be shared across colors while thresholds remain color-specific.
 
-| Color | Low | Moderate | High | Very high | Population |
+| Color | Небольшая | Умеренная | Большая | Очень большая | Population |
 |---|---:|---:|---:|---:|---|
 | Red | 1–12 | 13–40 | 41–75 | 76+ | 26 / 18 / 11 / 14 |
 | Green | 1–12 | 13–25 | 26–45 | 46+ | 60 / 19 / 19 / 10 |
@@ -210,7 +210,7 @@ The boundaries sit inside empty gaps of the observed vanilla distributions rathe
 
 This also makes the vanilla Circumspect +1 comparatively stable: fixed vanilla blue values are not immediately adjacent to the proposed boundaries. A modded Survey value near a boundary may legitimately move bands after effective-output processing.
 
-The labels `Low / Moderate / High / Very high` are placeholders. Localization wording remains a product/UX decision.
+The accepted Russian labels are `Небольшая / Умеренная / Большая / Очень большая`. Other-language localization remains a later localization task.
 
 ## Runtime source requirement
 
@@ -244,6 +244,4 @@ The reward-distribution question needed before band design is now **READY**:
 - the only dynamic technology-point modifier characterized;
 - mod contamination relevant to reward values excluded.
 
-Production behavior remains **BLOCKED** until:
-1. the qualitative tier count and player-facing vocabulary are accepted;
-2. the implementation gate proves the effective-output read boundary and the minimal native-tooltip insertion mechanism.
+Production behavior remains **BLOCKED** until the implementation gate proves the reward read boundary and the minimal native-tooltip insertion/restructuring mechanism.
