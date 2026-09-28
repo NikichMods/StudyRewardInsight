@@ -2,7 +2,7 @@
 
 Target: **Graveyard Keeper 1.407**
 
-Status: **candidate 0.1.2 is CI-green; Russian/English real-runtime visual acceptance and remaining-language localization remain open**
+Status: **0.1.2 Russian/English UX accepted in real runtime; remaining-language localization is the next product iteration**
 
 ## Product problem
 
@@ -254,14 +254,15 @@ Accepted for candidate 0.1.2:
 - color grouping by magnitude.
 
 Still open:
-1. localization wording for the remaining supported game languages;
-2. real-runtime visual acceptance of atomic reward-group wrapping, Russian alchemy wording, and English presentation.
+1. localization wording and runtime presentation for the remaining supported game languages.
+
+Accepted in 0.1.2 real runtime:
+- atomic reward-group wrapping;
+- Russian alchemy wording and layout;
+- English heading, magnitude labels, alchemy wording and layout.
 
 ## Remaining engineering questions
 
 The production owner/data-path questions are closed for the current Russian candidate. The selected implementation remains the narrow postfix/read-only native-data path documented in `docs/PRODUCTION_EVIDENCE_GATE.md`.
 
-No new broad host/runtime probe is required for candidate 0.1.2. Remaining work is:
-1. real-runtime visual acceptance of the atomic reward group and revised Russian/English wording;
-2. localization design/gates for languages other than Russian and English;
-3. normal candidate-to-stable integration only after applicable acceptance evidence is recorded.
+No new broad host/runtime probe is required for the accepted 0.1.2 behavior. Remaining product work is localization design/gates for languages other than Russian and English.
