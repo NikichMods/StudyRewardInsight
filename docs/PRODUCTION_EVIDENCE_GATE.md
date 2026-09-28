@@ -4,7 +4,7 @@ Target: **Graveyard Keeper 1.407**
 
 Branch: `feature/study-tooltip-preview`
 
-Status: **compact neutral Russian tooltip iteration READY for implementation; non-Russian localization and final real-runtime visual acceptance remain separate BLOCKED release work**
+Status: **candidate 0.1.2 atomic reward-group wrapping and English localization READY for implementation; remaining-language localization and final real-runtime visual acceptance stay separate release work**
 
 This record closes the implementation evidence gates required before the first production-source mutation for the accepted Study Reward Insight tooltip model.
 
@@ -205,16 +205,13 @@ Only already-supported ordinary incomplete Study tooltips. No alchemy craft, vis
 
 ## Gate D — localization expansion
 
-**BLOCKED for non-Russian production behavior; not blocking the Russian implementation**
+**READY for English; BLOCKED for languages other than Russian and English**
 
-The accepted product wording is Russian. Other supported-language wording has not yet been accepted.
+Russian and English wording is now accepted. Other supported-language wording remains unaccepted.
 
-First production iteration therefore:
-- uses `GameSettings.GetCurrentLanguage()`;
-- transforms the Study row only for `ru`;
-- leaves vanilla behavior untouched for every other language.
+Current-language ownership is already accepted through `GameSettings.GetCurrentLanguage()`. Stable PrayerClarity localization code and accepted runtime language switching use the game's `en` / `ru` locale codes, with normalized regional variants handled by prefix.
 
-Expanding SRI behavior to another language requires accepted wording and its own reviewable localization gate. No runtime probe is needed merely to detect language: current-language ownership is already accepted and statically exposed by `GameSettings.GetCurrentLanguage()`.
+Candidate 0.1.2 may therefore transform the row for Russian and English only. Every other language remains vanilla until its wording is accepted and separately gated.
 
 ## Gate E — real-runtime visual acceptance
 
@@ -282,3 +279,72 @@ Formatting/model simplification only on the already-gated Russian full-detail in
 - build-time tests can prove exact strings, threshold preservation, magnitude-only grouping, and one-line-first-group formatting;
 - no new host/runtime research is required because the owner, writer, renderer, and data paths are unchanged or reduced;
 - final acceptance remains a direct human runtime visual check of the new candidate.
+
+
+## Gate G — atomic reward icon + magnitude wrapping
+
+**READY**
+
+Candidate 0.1.1 runtime screenshots showed the point icon can remain at the end of one centered line while the magnitude moves to the next.
+
+**Observable property**
+
+Each complete reward group — point icon(s) plus its full magnitude label — must wrap as one visual unit. The heading may stay on the previous line. The alchemy sentence may wrap normally.
+
+**Canonical owner / data path**
+
+SRI owns the formatted string. Native NGUI owns final wrapping/rendering. The existing `BubbleWidgetTextData.text` row remains the only modified host field.
+
+**Final writer / consumer / commit point**
+
+Unchanged: SRI changes the returned incomplete-Survey row text; native `BubbleWidgetText -> UILabel/NGUIText` performs final wrapping.
+
+**Blast radius**
+
+Only spacing inside SRI-owned reward groups changes. No tooltip width, alignment, widget hierarchy, renderer, hook, or lifecycle behavior changes.
+
+**Preserved invariants**
+
+- centered native alignment stays unchanged;
+- the heading and first reward group may still separate when the group does not fit;
+- icons remain native inline point symbols;
+- the alchemy sentence keeps ordinary wrapping;
+- rewards, costs, progression, save state and RNG remain unchanged.
+
+**Acceptance evidence**
+
+NGUI source inspection shows ordinary ASCII spaces act as word-wrap boundaries while the bitmap-font path explicitly renders U+2009 THIN SPACE via the normal space glyph at half advance. Candidate 0.1.2 will use two thin spaces for approximately normal visual spacing inside the atomic reward group, including inside `Очень высокая` / `Very High`. Formatter tests can prove the string structure; the user's real-runtime view remains the final visual acceptance. No dedicated harness is justified.
+
+## Gate H — English player-facing wording
+
+**READY**
+
+**Observable property**
+
+For English game language, show:
+- `Study reward: [icons] Low / Medium / High / Very High`;
+- `Studying unlocks an alchemy use.` only when native decomposition capability is present.
+
+For Russian, use:
+- `Награда за исследование: ...`;
+- `Исследование позволит использовать этот предмет в алхимии.`.
+
+**Canonical owner / data path**
+
+Reward and alchemy ownership is unchanged. Language selection uses accepted `GameSettings.GetCurrentLanguage()`; existing accepted project-family localization evidence uses `en` and `ru`.
+
+**Final writer / consumer / commit point**
+
+The same uniquely identified native incomplete-Survey text row is replaced before the native item-tooltip renderer consumes it.
+
+**Blast radius**
+
+The existing Russian transformation expands to English only. Other languages remain vanilla.
+
+**Preserved invariants**
+
+Magnitude thresholds are identical across locales; exact quantities and exact alchemy output remain hidden; no new UI objects or language polling; completed Study remains native.
+
+**Acceptance evidence**
+
+Russian and English wording is accepted for this candidate. Build-time tests verify both language blocks and labels. English runtime visual acceptance is still required before stable promotion.
