@@ -6,12 +6,6 @@ using System.Text;
 
 namespace StudyRewardInsight
 {
-    internal enum TooltipLanguage
-    {
-        Russian,
-        English
-    }
-
     internal enum RewardMagnitude
     {
         Low,
@@ -156,57 +150,19 @@ namespace StudyRewardInsight
             RewardMagnitude magnitude,
             TooltipLanguage language)
         {
-            if (language == TooltipLanguage.Russian)
-            {
-                switch (magnitude)
-                {
-                    case RewardMagnitude.Low: return "Низкая";
-                    case RewardMagnitude.Medium: return "Средняя";
-                    case RewardMagnitude.High: return "Высокая";
-                    case RewardMagnitude.VeryHigh: return "Очень высокая";
-                    default: throw new ArgumentOutOfRangeException(nameof(magnitude));
-                }
-            }
-
-            if (language == TooltipLanguage.English)
-            {
-                switch (magnitude)
-                {
-                    case RewardMagnitude.Low: return "Low";
-                    case RewardMagnitude.Medium: return "Medium";
-                    case RewardMagnitude.High: return "High";
-                    case RewardMagnitude.VeryHigh: return "Very High";
-                    default: throw new ArgumentOutOfRangeException(nameof(magnitude));
-                }
-            }
-
-            throw new ArgumentOutOfRangeException(nameof(language));
+            return TooltipLocalization.MagnitudeLabel(
+                magnitude,
+                language);
         }
 
         private static string Heading(TooltipLanguage language)
         {
-            switch (language)
-            {
-                case TooltipLanguage.Russian:
-                    return "Награда за исследование:";
-                case TooltipLanguage.English:
-                    return "Study reward:";
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(language));
-            }
+            return TooltipLocalization.Heading(language);
         }
 
         private static string AlchemyLine(TooltipLanguage language)
         {
-            switch (language)
-            {
-                case TooltipLanguage.Russian:
-                    return "Исследование позволит использовать этот предмет в алхимии.";
-                case TooltipLanguage.English:
-                    return "Studying unlocks an alchemy use.";
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(language));
-            }
+            return TooltipLocalization.AlchemyLine(language);
         }
 
         private static string Atomicize(string text)
