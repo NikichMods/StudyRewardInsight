@@ -184,7 +184,7 @@ Append `После изучения сгодится для алхимии.` onl
 
 **Final writer / consumer**
 
-SRI reads only the native capability metadata and adds one native text row to the same returned tooltip-data list. It does not reveal decomposition type IDs or outputs.
+SRI reads only the native capability metadata and appends the sentence inside the already-identified native incomplete Survey text row. It does not create a parallel widget and does not reveal decomposition type IDs or outputs.
 
 **Blast radius**
 
