@@ -1,0 +1,74 @@
+name: Build Study value research probe
+
+on:
+  push:
+    branches:
+      - 'research/study-value-model'
+    paths:
+      - 'research/StudyValueDump/**'
+      - '.github/workflows/study-value-dump.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: study-value-dump-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@v4
+
+      - name: Verify source identity
+        shell: pwsh
+        run: |
+          $actual = git rev-parse HEAD
+          Write-Host "source_sha=$actual"
+          if ($actual -ne "${{ github.sha }}") {
+            throw "Checkout SHA mismatch: expected ${{ github.sha }}, got $actual"
+          }
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore
+        run: dotnet restore research/StudyValueDump/StudyValueDump.csproj
+
+      - name: Build
+        run: dotnet build research/StudyValueDump/StudyValueDump.csproj -c Release --no-restore --nologo
+
+      - name: Prepare research artifact
+        shell: pwsh
+        run: |
+          $dll = Resolve-Path 'research/StudyValueDump/bin/Release/StudyValueDump.dll'
+          $out = Join-Path $PWD 'artifact'
+          New-Item -ItemType Directory -Force -Path $out | Out-Null
+          $handoff = Join-Path $out 'StudyValueDump-0.2.0.dll'
+          Copy-Item $dll $handoff
+          Copy-Item 'research/StudyValueDump/README.md' (Join-Path $out 'README.txt')
+          $hash = (Get-FileHash $handoff -Algorithm SHA256).Hash.ToLowerInvariant()
+          @(
+            "probe_version=0.2.0"
+            "source_sha=${{ github.sha }}"
+            "sha256=$hash"
+            "target=GraveyardKeeper-1.407"
+            "artifact=StudyValueDump-0.2.0.dll"
+            "purpose=read-only Study value model completion"
+          ) | Set-Content -Encoding UTF8 (Join-Path $out 'BUILD_IDENTITY.txt')
+          Get-Content (Join-Path $out 'BUILD_IDENTITY.txt')
+
+      - name: Upload research artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: StudyValueDump-0.2.0-${{ github.sha }}
+          path: artifact/*
+          if-no-files-found: error
+          retention-days: 14
