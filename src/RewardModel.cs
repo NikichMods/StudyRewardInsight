@@ -45,7 +45,7 @@ namespace StudyRewardInsight
 
     internal static class RewardModel
     {
-        private const string AtomicGap = "\u2009\u2009";
+        private const string AtomicGap = "\u00A0";
 
         private sealed class RewardGroup
         {
