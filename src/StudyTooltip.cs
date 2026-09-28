@@ -156,10 +156,6 @@ namespace StudyRewardInsight
                 AddPoints(snapshot, id, points);
             }
 
-            ReadFaith(
-                GameApi.List(surveyCraft, "needs"),
-                snapshot);
-
             return true;
         }
 
@@ -260,39 +256,6 @@ namespace StudyRewardInsight
                 && string.IsNullOrEmpty(
                     GameApi.RawExpression(
                         GameApi.Get(entry, "max_value")));
-        }
-
-        private static void ReadFaith(
-            IList needs,
-            RewardSnapshot snapshot)
-        {
-            if (needs == null)
-            {
-                snapshot.FaithKnown = true;
-                snapshot.Faith = 0;
-                return;
-            }
-
-            int faith = 0;
-            foreach (object need in needs)
-            {
-                if (GameApi.Id(need) != "faith")
-                    continue;
-
-                if (!IsFixedEntry(need))
-                {
-                    snapshot.FaithKnown = false;
-                    snapshot.Faith = 0;
-                    return;
-                }
-
-                int value = GameApi.IntValue(need, "value", 0);
-                if (value > 0)
-                    faith += value;
-            }
-
-            snapshot.FaithKnown = true;
-            snapshot.Faith = faith;
         }
 
         private static void AddPoints(

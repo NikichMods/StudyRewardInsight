@@ -9,11 +9,10 @@ namespace StudyRewardInsight
         private static int Main()
         {
             TestMagnitudeBoundaries();
-            TestModifierBoundaries();
-            TestGrouping();
-            TestSeparateAssessments();
+            TestMagnitudeLabels();
+            TestGroupingByMagnitude();
+            TestSeparateMagnitudes();
             TestAlchemyLine();
-            TestZeroFaithModifier();
 
             Console.WriteLine("RewardModel tests passed.");
             return 0;
@@ -21,59 +20,55 @@ namespace StudyRewardInsight
 
         private static void TestMagnitudeBoundaries()
         {
-            AssertMagnitude("r", 1, RewardMagnitude.Small);
-            AssertMagnitude("r", 12, RewardMagnitude.Small);
-            AssertMagnitude("r", 13, RewardMagnitude.Moderate);
-            AssertMagnitude("r", 40, RewardMagnitude.Moderate);
-            AssertMagnitude("r", 41, RewardMagnitude.Large);
-            AssertMagnitude("r", 75, RewardMagnitude.Large);
-            AssertMagnitude("r", 76, RewardMagnitude.VeryLarge);
+            AssertMagnitude("r", 1, RewardMagnitude.Low);
+            AssertMagnitude("r", 12, RewardMagnitude.Low);
+            AssertMagnitude("r", 13, RewardMagnitude.Medium);
+            AssertMagnitude("r", 40, RewardMagnitude.Medium);
+            AssertMagnitude("r", 41, RewardMagnitude.High);
+            AssertMagnitude("r", 75, RewardMagnitude.High);
+            AssertMagnitude("r", 76, RewardMagnitude.VeryHigh);
 
-            AssertMagnitude("g", 12, RewardMagnitude.Small);
-            AssertMagnitude("g", 13, RewardMagnitude.Moderate);
-            AssertMagnitude("g", 25, RewardMagnitude.Moderate);
-            AssertMagnitude("g", 26, RewardMagnitude.Large);
-            AssertMagnitude("g", 45, RewardMagnitude.Large);
-            AssertMagnitude("g", 46, RewardMagnitude.VeryLarge);
+            AssertMagnitude("g", 12, RewardMagnitude.Low);
+            AssertMagnitude("g", 13, RewardMagnitude.Medium);
+            AssertMagnitude("g", 25, RewardMagnitude.Medium);
+            AssertMagnitude("g", 26, RewardMagnitude.High);
+            AssertMagnitude("g", 45, RewardMagnitude.High);
+            AssertMagnitude("g", 46, RewardMagnitude.VeryHigh);
 
-            AssertMagnitude("b", 12, RewardMagnitude.Small);
-            AssertMagnitude("b", 13, RewardMagnitude.Moderate);
-            AssertMagnitude("b", 37, RewardMagnitude.Moderate);
-            AssertMagnitude("b", 38, RewardMagnitude.Large);
-            AssertMagnitude("b", 65, RewardMagnitude.Large);
-            AssertMagnitude("b", 66, RewardMagnitude.VeryLarge);
+            AssertMagnitude("b", 12, RewardMagnitude.Low);
+            AssertMagnitude("b", 13, RewardMagnitude.Medium);
+            AssertMagnitude("b", 37, RewardMagnitude.Medium);
+            AssertMagnitude("b", 38, RewardMagnitude.High);
+            AssertMagnitude("b", 65, RewardMagnitude.High);
+            AssertMagnitude("b", 66, RewardMagnitude.VeryHigh);
         }
 
-        private static void TestModifierBoundaries()
+        private static void TestMagnitudeLabels()
         {
             AssertEqual(
-                RewardModifier.Stingier,
-                RewardModel.Modifier(14, 2, true),
-                "ratio below 7.5");
-
+                "Низкая",
+                RewardModel.MagnitudeLabel(RewardMagnitude.Low),
+                "low label");
             AssertEqual(
-                RewardModifier.None,
-                RewardModel.Modifier(15, 2, true),
-                "ratio exactly 7.5");
-
+                "Средняя",
+                RewardModel.MagnitudeLabel(RewardMagnitude.Medium),
+                "medium label");
             AssertEqual(
-                RewardModifier.None,
-                RewardModel.Modifier(25, 2, true),
-                "ratio exactly 12.5");
-
+                "Высокая",
+                RewardModel.MagnitudeLabel(RewardMagnitude.High),
+                "high label");
             AssertEqual(
-                RewardModifier.MoreGenerous,
-                RewardModel.Modifier(26, 2, true),
-                "ratio above 12.5");
+                "Очень высокая",
+                RewardModel.MagnitudeLabel(RewardMagnitude.VeryHigh),
+                "very high label");
         }
 
-        private static void TestGrouping()
+        private static void TestGroupingByMagnitude()
         {
             RewardSnapshot snapshot = new RewardSnapshot
             {
                 Red = 10,
-                Green = 10,
-                Faith = 1
+                Green = 5
             };
 
             string actual = RewardModel.BuildRussianBlock(
@@ -81,42 +76,41 @@ namespace StudyRewardInsight
                 false);
 
             string expected =
-                "Награда за исследование:\n"
-                + "(r)(g) Небольшая";
-
-            AssertEqual(expected, actual, "identical assessments group");
-        }
-
-        private static void TestSeparateAssessments()
-        {
-            RewardSnapshot snapshot = new RewardSnapshot
-            {
-                Red = 10,
-                Green = 5,
-                Faith = 1
-            };
-
-            string actual = RewardModel.BuildRussianBlock(
-                snapshot,
-                false);
-
-            string expected =
-                "Награда за исследование:\n"
-                + "(r) Небольшая\n"
-                + "(g) Небольшая, скупее обычного";
+                "Награда за исследование: (r)(g) Низкая";
 
             AssertEqual(
                 expected,
                 actual,
-                "different modifiers must not group");
+                "same magnitude groups regardless of former efficiency");
+        }
+
+        private static void TestSeparateMagnitudes()
+        {
+            RewardSnapshot snapshot = new RewardSnapshot
+            {
+                Red = 10,
+                Green = 13
+            };
+
+            string actual = RewardModel.BuildRussianBlock(
+                snapshot,
+                false);
+
+            string expected =
+                "Награда за исследование: (r) Низкая\n"
+                + "(g) Средняя";
+
+            AssertEqual(
+                expected,
+                actual,
+                "different magnitudes stay separate");
         }
 
         private static void TestAlchemyLine()
         {
             RewardSnapshot snapshot = new RewardSnapshot
             {
-                Blue = 45,
-                Faith = 2
+                Blue = 45
             };
 
             string actual = RewardModel.BuildRussianBlock(
@@ -124,30 +118,10 @@ namespace StudyRewardInsight
                 true);
 
             string expected =
-                "Награда за исследование:\n"
-                + "(b) Большая, щедрее обычного\n"
-                + "После изучения сгодится для алхимии.";
+                "Награда за исследование: (b) Высокая\n"
+                + "Открывает алхимическое разложение.";
 
             AssertEqual(expected, actual, "alchemy capability line");
-        }
-
-        private static void TestZeroFaithModifier()
-        {
-            RewardSnapshot snapshot = new RewardSnapshot
-            {
-                Blue = 100,
-                Faith = 0
-            };
-
-            string actual = RewardModel.BuildRussianBlock(
-                snapshot,
-                false);
-
-            string expected =
-                "Награда за исследование:\n"
-                + "(b) Очень большая";
-
-            AssertEqual(expected, actual, "zero Faith modifier omitted");
         }
 
         private static void AssertMagnitude(

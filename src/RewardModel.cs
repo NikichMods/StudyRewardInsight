@@ -8,17 +8,10 @@ namespace StudyRewardInsight
 {
     internal enum RewardMagnitude
     {
-        Small,
-        Moderate,
-        Large,
-        VeryLarge
-    }
-
-    internal enum RewardModifier
-    {
-        None,
-        Stingier,
-        MoreGenerous
+        Low,
+        Medium,
+        High,
+        VeryHigh
     }
 
     internal sealed class RewardSnapshot
@@ -26,8 +19,6 @@ namespace StudyRewardInsight
         internal int Red;
         internal int Green;
         internal int Blue;
-        internal int Faith;
-        internal bool FaithKnown = true;
 
         internal int Points(string pointId)
         {
@@ -53,60 +44,18 @@ namespace StudyRewardInsight
         }
     }
 
-    internal struct RewardAssessment : IEquatable<RewardAssessment>
-    {
-        internal RewardAssessment(
-            RewardMagnitude magnitude,
-            RewardModifier modifier)
-        {
-            Magnitude = magnitude;
-            Modifier = modifier;
-        }
-
-        internal RewardMagnitude Magnitude { get; }
-        internal RewardModifier Modifier { get; }
-
-        public bool Equals(RewardAssessment other)
-        {
-            return Magnitude == other.Magnitude
-                && Modifier == other.Modifier;
-        }
-
-        public override bool Equals(object obj)
-        {
-            return obj is RewardAssessment
-                && Equals((RewardAssessment)obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return ((int)Magnitude * 397) ^ (int)Modifier;
-        }
-    }
-
     internal static class RewardModel
     {
         private sealed class RewardGroup
         {
-            internal RewardGroup(RewardAssessment assessment)
+            internal RewardGroup(RewardMagnitude magnitude)
             {
-                Assessment = assessment;
+                Magnitude = magnitude;
             }
 
-            internal RewardAssessment Assessment { get; }
+            internal RewardMagnitude Magnitude { get; }
             internal List<string> PointIds { get; } =
                 new List<string>();
-        }
-
-        internal static RewardAssessment Assess(
-            string pointId,
-            int points,
-            int faith,
-            bool faithKnown)
-        {
-            return new RewardAssessment(
-                Magnitude(pointId, points),
-                Modifier(points, faith, faithKnown));
         }
 
         internal static RewardMagnitude Magnitude(
@@ -119,42 +68,26 @@ namespace StudyRewardInsight
             switch (pointId)
             {
                 case "r":
-                    if (points <= 12) return RewardMagnitude.Small;
-                    if (points <= 40) return RewardMagnitude.Moderate;
-                    if (points <= 75) return RewardMagnitude.Large;
-                    return RewardMagnitude.VeryLarge;
+                    if (points <= 12) return RewardMagnitude.Low;
+                    if (points <= 40) return RewardMagnitude.Medium;
+                    if (points <= 75) return RewardMagnitude.High;
+                    return RewardMagnitude.VeryHigh;
 
                 case "g":
-                    if (points <= 12) return RewardMagnitude.Small;
-                    if (points <= 25) return RewardMagnitude.Moderate;
-                    if (points <= 45) return RewardMagnitude.Large;
-                    return RewardMagnitude.VeryLarge;
+                    if (points <= 12) return RewardMagnitude.Low;
+                    if (points <= 25) return RewardMagnitude.Medium;
+                    if (points <= 45) return RewardMagnitude.High;
+                    return RewardMagnitude.VeryHigh;
 
                 case "b":
-                    if (points <= 12) return RewardMagnitude.Small;
-                    if (points <= 37) return RewardMagnitude.Moderate;
-                    if (points <= 65) return RewardMagnitude.Large;
-                    return RewardMagnitude.VeryLarge;
+                    if (points <= 12) return RewardMagnitude.Low;
+                    if (points <= 37) return RewardMagnitude.Medium;
+                    if (points <= 65) return RewardMagnitude.High;
+                    return RewardMagnitude.VeryHigh;
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(pointId));
             }
-        }
-
-        internal static RewardModifier Modifier(
-            int points,
-            int faith,
-            bool faithKnown)
-        {
-            if (!faithKnown || faith <= 0 || points <= 0)
-                return RewardModifier.None;
-
-            double ratio = (double)points / faith;
-            if (ratio < 7.5d)
-                return RewardModifier.Stingier;
-            if (ratio > 12.5d)
-                return RewardModifier.MoreGenerous;
-            return RewardModifier.None;
         }
 
         internal static string BuildRussianBlock(
@@ -173,16 +106,13 @@ namespace StudyRewardInsight
                 if (points <= 0)
                     continue;
 
-                RewardAssessment assessment = Assess(
-                    pointId,
-                    points,
-                    snapshot.Faith,
-                    snapshot.FaithKnown);
+                RewardMagnitude magnitude =
+                    Magnitude(pointId, points);
 
                 RewardGroup group = null;
                 foreach (RewardGroup candidate in groups)
                 {
-                    if (candidate.Assessment.Equals(assessment))
+                    if (candidate.Magnitude == magnitude)
                     {
                         group = candidate;
                         break;
@@ -191,7 +121,7 @@ namespace StudyRewardInsight
 
                 if (group == null)
                 {
-                    group = new RewardGroup(assessment);
+                    group = new RewardGroup(magnitude);
                     groups.Add(group);
                 }
 
@@ -201,9 +131,11 @@ namespace StudyRewardInsight
             StringBuilder text = new StringBuilder();
             text.Append("Награда за исследование:");
 
+            bool firstGroup = true;
             foreach (RewardGroup group in groups)
             {
-                text.Append("\n");
+                text.Append(firstGroup ? " " : "\n");
+
                 foreach (string pointId in group.PointIds)
                 {
                     text.Append("(");
@@ -212,20 +144,14 @@ namespace StudyRewardInsight
                 }
 
                 text.Append(" ");
-                text.Append(MagnitudeLabel(group.Assessment.Magnitude));
-
-                string modifier = ModifierLabel(group.Assessment.Modifier);
-                if (!string.IsNullOrEmpty(modifier))
-                {
-                    text.Append(", ");
-                    text.Append(modifier);
-                }
+                text.Append(MagnitudeLabel(group.Magnitude));
+                firstGroup = false;
             }
 
             if (hasAlchemyDecomposition)
             {
                 text.Append("\n");
-                text.Append("После изучения сгодится для алхимии.");
+                text.Append("Открывает алхимическое разложение.");
             }
 
             return text.ToString();
@@ -236,32 +162,16 @@ namespace StudyRewardInsight
         {
             switch (magnitude)
             {
-                case RewardMagnitude.Small:
-                    return "Небольшая";
-                case RewardMagnitude.Moderate:
-                    return "Умеренная";
-                case RewardMagnitude.Large:
-                    return "Большая";
-                case RewardMagnitude.VeryLarge:
-                    return "Очень большая";
+                case RewardMagnitude.Low:
+                    return "Низкая";
+                case RewardMagnitude.Medium:
+                    return "Средняя";
+                case RewardMagnitude.High:
+                    return "Высокая";
+                case RewardMagnitude.VeryHigh:
+                    return "Очень высокая";
                 default:
                     throw new ArgumentOutOfRangeException(nameof(magnitude));
-            }
-        }
-
-        internal static string ModifierLabel(
-            RewardModifier modifier)
-        {
-            switch (modifier)
-            {
-                case RewardModifier.None:
-                    return string.Empty;
-                case RewardModifier.Stingier:
-                    return "скупее обычного";
-                case RewardModifier.MoreGenerous:
-                    return "щедрее обычного";
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(modifier));
             }
         }
     }
