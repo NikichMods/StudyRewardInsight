@@ -2,7 +2,7 @@
 
 Target: **Graveyard Keeper 1.407**
 
-Status: **working product concept after Study-value research; production remains BLOCKED pending final UX wording/layout and implementation evidence gate**
+Status: **Russian product model implemented in candidate 0.1.1; real-runtime visual acceptance and non-Russian localization remain open**
 
 ## Product problem
 
@@ -249,10 +249,9 @@ Still open:
 
 ## Remaining engineering questions
 
-Before production source mutation:
-1. prove the narrowest safe way to observe effective processed Survey R/G/B output at tooltip time without altering RNG/game state;
-2. prove the narrowest native-tooltip insertion point and row identity;
-3. establish final writer/consumer, blast radius, invariants, and acceptance evidence;
-4. mark each materially independent behavior change READY/BLOCKED.
+The production owner/data-path questions are closed for the current Russian candidate. The selected implementation remains the narrow postfix/read-only native-data path documented in `docs/PRODUCTION_EVIDENCE_GATE.md`.
 
-Until then production behavior remains **BLOCKED**.
+No new host/runtime probe is required for candidate 0.1.1. Remaining work is:
+1. real-runtime visual acceptance of the compact presentation;
+2. localization design/gates before enabling non-Russian languages;
+3. normal candidate-to-stable integration only after applicable acceptance evidence is recorded.
