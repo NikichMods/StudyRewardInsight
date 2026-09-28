@@ -69,19 +69,28 @@ namespace StudyRewardInsight
 
             Type gjl = RequireTypeAcrossLoadedAssemblies("GJL");
             _localize = gjl.GetMethods(Stat)
+                .Where(m =>
+                    m.Name == "L"
+                    && m.ReturnType == typeof(string))
+                .OrderBy(m => m.GetParameters().Length)
                 .FirstOrDefault(m =>
                 {
-                    if (m.Name != "L")
-                        return false;
-
                     ParameterInfo[] parameters = m.GetParameters();
-                    return parameters.Length == 1
+                    if (parameters.Length == 1)
+                    {
+                        return parameters[0].ParameterType
+                            == typeof(string);
+                    }
+
+                    return parameters.Length == 2
                         && parameters[0].ParameterType == typeof(string)
-                        && m.ReturnType == typeof(string);
+                        && parameters[1].ParameterType == typeof(object[]);
                 });
 
             if (_localize == null)
-                throw new MissingMethodException("GJL", "L(string)");
+                throw new MissingMethodException(
+                    "GJL",
+                    "L(string[, object[]])");
         }
 
         internal static object GetSurveyCraft(object itemDefinition)
@@ -99,7 +108,12 @@ namespace StudyRewardInsight
 
         internal static string Localize(string key)
         {
-            return _localize.Invoke(null, new object[] { key }) as string
+            ParameterInfo[] parameters = _localize.GetParameters();
+            object[] args = parameters.Length == 1
+                ? new object[] { key }
+                : new object[] { key, Array.Empty<object>() };
+
+            return _localize.Invoke(null, args) as string
                 ?? string.Empty;
         }
 
