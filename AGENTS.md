@@ -37,7 +37,7 @@ Before Study, preserve the **semantics** of the native incomplete-Study state, b
 
 Do not hardcode an item-type whitelist or an `item ID -> category` table unless evidence shows it is necessary and preferable.
 
-The accepted Russian reward scale is **Низкая / Средняя / Высокая / Очень высокая** with color-specific thresholds documented in `docs/PRODUCT_CONCEPT.md`. The player-facing tooltip does **not** show the former relative `щедрее обычного / скупее обычного` modifier; its underlying research remains historical evidence only. Treat future changes to those semantics as product changes, not implementation details.
+The accepted reward scales are Russian **Низкая / Средняя / Высокая / Очень высокая** and English **Low / Medium / High / Very High**, with the same color-specific thresholds documented in `docs/PRODUCT_CONCEPT.md`. The player-facing tooltip does **not** show the former relative `щедрее обычного / скупее обычного` modifier; its underlying research remains historical evidence only. The reward icon group and its qualitative label must wrap as one visual unit. Treat future changes to those semantics as product changes, not implementation details.
 
 ## Mandatory project-specific start-of-work checks
 
