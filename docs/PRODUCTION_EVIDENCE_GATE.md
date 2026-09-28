@@ -4,7 +4,7 @@ Target: **Graveyard Keeper 1.407**
 
 Branch: `feature/study-tooltip-preview`
 
-Status: **candidate 0.1.2 atomic reward-group wrapping and English localization READY for implementation; remaining-language localization and final real-runtime visual acceptance stay separate release work**
+Status: **candidate 0.1.2 accepted in real runtime; remaining-language localization is a separate future production gate**
 
 This record closes the implementation evidence gates required before the first production-source mutation for the accepted Study Reward Insight tooltip model.
 
@@ -215,18 +215,22 @@ Candidate 0.1.2 may therefore transform the row for Russian and English only. Ev
 
 ## Gate E — real-runtime visual acceptance
 
-**BLOCKED for promotion to stable; not blocking implementation**
+**ACCEPTED for 0.1.2 stable promotion**
 
-Static evidence proves the semantic owner, returned-list insertion boundary, and native renderer family. It does not prove the final visual quality of the new multi-line Russian content in the live parchment.
+Real-runtime screenshots from the exact 0.1.2 handed binary were reviewed and explicitly accepted on 2026-09-28.
 
-Required later acceptance:
-- one ordinary one-row Study preview;
-- one two-row/multi-color preview if naturally accessible;
-- one alchemy-capability preview if naturally accessible;
-- verify wrapping, spacing, icon grouping, and that completed Study remains vanilla when an accessible completed item is available.
+Observed and accepted:
+- ordinary Russian reward presentation;
+- grouped multi-color Russian reward presentation;
+- Russian alchemy-capability sentence wrapping;
+- ordinary English reward presentation;
+- grouped multi-color English reward presentation;
+- English alchemy-capability presentation;
+- U+00A0 keeps each point-icon group attached to its complete magnitude label.
 
-Do not build a new runtime probe merely for this visual property. Human observation of the real production candidate is the stronger evidence.
+The normal BepInEx log from the same session shows SRI 0.1.2 loading successfully and contains no SRI-specific warning/exception/fail-safe diagnostic.
 
+Completed-Study behavior was not modified by the 0.1.2 presentation changes and remains protected by the existing `fullDetail`/native incomplete-row targeting architecture. No new probe is justified solely to repeat an unchanged upstream branch after the user accepted the integrated candidate.
 
 ## Gate F — compact neutral runtime-UX iteration
 
