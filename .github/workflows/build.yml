@@ -73,12 +73,12 @@ jobs:
           Copy-Item $dll (Join-Path $out 'StudyRewardInsight.dll')
           $hash = (Get-FileHash $dll -Algorithm SHA256).Hash.ToLowerInvariant()
           @(
-            "candidate_version=0.1.1"
+            "candidate_version=0.1.2"
             "source_sha=${{ github.sha }}"
             "sha256=$hash"
             "target=GraveyardKeeper-1.407"
             "artifact=StudyRewardInsight.dll"
-            "scope=compact neutral Russian incomplete-Study tooltip preview"
+            "scope=Russian and English incomplete-Study tooltip preview"
           ) | Set-Content -Encoding UTF8 (Join-Path $out 'BUILD_IDENTITY.txt')
           Get-Content (Join-Path $out 'BUILD_IDENTITY.txt')
 
@@ -86,7 +86,7 @@ jobs:
         if: startsWith(github.ref, 'refs/heads/dev/') || startsWith(github.ref, 'refs/heads/feature/') || startsWith(github.ref, 'refs/heads/fix/')
         uses: actions/upload-artifact@v4
         with:
-          name: StudyRewardInsight-0.1.1-${{ github.sha }}
+          name: StudyRewardInsight-0.1.2-${{ github.sha }}
           path: artifact/*
           if-no-files-found: error
           retention-days: 14
