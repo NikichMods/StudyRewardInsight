@@ -356,3 +356,105 @@ Magnitude thresholds are identical across locales; exact quantities and exact al
 **Acceptance evidence**
 
 Russian and English wording is accepted for this candidate. Build-time tests verify both language blocks and labels. English runtime visual acceptance is still required before stable promotion.
+
+
+## Gate I — full supported-language localization
+
+**READY for candidate implementation; runtime typography remains an acceptance check**
+
+This gate covers the expansion from the accepted Russian/English 0.1.2 presentation to every locale exposed by Graveyard Keeper 1.407.
+
+### Observable property
+
+The same accepted Study Reward Insight semantics must be available in all game languages:
+- one localized Study-reward heading;
+- the same four qualitative magnitudes;
+- the same grouped point-icon presentation;
+- the same alchemy-capability cue when applicable;
+- no exact technology-point quantity or exact decomposition result.
+
+Russian and English wording and layout remain unchanged.
+
+Candidate locale wording:
+
+| Locale | Heading | Low | Medium | High | Very High | Alchemy cue |
+| --- | --- | --- | --- | --- | --- | --- |
+| en | Study reward: | Low | Medium | High | Very High | Studying unlocks an alchemy use. |
+| de | Forschungsbelohnung: | Niedrig | Mittel | Hoch | Sehr hoch | Nach der Untersuchung kann dieser Gegenstand in der Alchemie verwendet werden. |
+| fr | Récompense d'étude: | Faible | Moyenne | Élevée | Très élevée | L'étude permettra d'utiliser cet objet en alchimie. |
+| pt-br | Recompensa por estudo: | Baixa | Média | Alta | Muito alta | O estudo permitirá usar este item em alquimia. |
+| es | Recompensa de estudio: | Baja | Media | Alta | Muy alta | El estudio permitirá usar este objeto en alquimia. |
+| ru | Награда за исследование: | Низкая | Средняя | Высокая | Очень высокая | Исследование позволит использовать этот предмет в алхимии. |
+| it | Ricompensa dello studio: | Bassa | Media | Alta | Molto alta | Lo studio permetterà di usare questo oggetto in alchimia. |
+| pl | Nagroda za badanie: | Niska | Średnia | Wysoka | Bardzo wysoka | Zbadanie pozwoli używać tego przedmiotu w alchemii. |
+| ja | 研究報酬: | 低い | 中程度 | 高い | 非常に高い | 研究すると、このアイテムを錬金術に使用できます。 |
+| zh_cn | 研究奖励: | 低 | 中 | 高 | 非常高 | 研究后可将此物品用于炼金术。 |
+| ko | 연구 보상: | 낮음 | 중간 | 높음 | 매우 높음 | 연구하면 이 아이템을 연금술에 사용할 수 있습니다. |
+
+The translations intentionally preserve the product meaning rather than reproducing exact numeric tiers or adding recommendations.
+
+### Canonical owner / data path
+
+Unchanged from 0.1.2:
+- current language: `GameSettings.GetCurrentLanguage()`;
+- reward data: current native Survey `CraftDefinition.output`;
+- alchemy capability: native `ItemDefinition.GetItemDetails().alchemy.decomposes`;
+- output surface: the existing incomplete-Survey `BubbleWidgetTextData.text`.
+
+The accepted 0.1.2 runtime session directly observed the host loading these locale identifiers:
+`en`, `de`, `fr`, `pt-br`, `es`, `ru`, `it`, `pl`, `ja`, `zh_cn`, and `ko`.
+
+Terminology research also aligns the candidate wording with established Graveyard Keeper vocabulary where direct sources are available:
+- German uses `Forschung`, `Untersuchung/untersuchen`, `Alchemie`;
+- French community reference uses `Récompense d'étude` and `Alchimie`;
+- Spanish reference uses `Recompensa de estudio` and `Alquimia`;
+- Brazilian Portuguese reference uses `Recompensa por Estudo` and `Alquimia`;
+- Polish player documentation uses `Stół Badawczy`, `badanie/badać`, and alchemical-process terminology;
+- Japanese, Simplified Chinese and Korean references consistently use their ordinary Study/research and alchemy vocabulary.
+
+### Solution-family checkpoint
+
+**A. External per-language JSON/resource files**
+
+Rejected for this localization set. It would add packaging, file discovery, parsing, missing-file and reload failure modes for eleven small immutable strings per locale with no current user-editable-localization requirement.
+
+**B. Static localization table keyed by the host locale code — SELECTED**
+
+The entire text surface is small and fixed. A static table is deterministic, has no file/lifecycle state, keeps all locales visible to tests, and does not broaden the runtime hook.
+
+**C. Assemble new sentences from existing GJL fragments**
+
+Rejected. The host owns individual terms but does not provide a verified phrase/template that expresses SRI's new heading, four qualitative magnitudes, and alchemy-capability sentence with correct grammar across all languages. Building sentences from fragments would create more grammatical assumptions, not fewer.
+
+### Final writer / consumer / commit point
+
+Unchanged: SRI replaces only the text of the uniquely identified native incomplete-Survey row returned by `ItemDefinition.GetTooltipData(Item,bool)`; native NGUI performs final layout.
+
+### Blast radius
+
+Only locales previously left vanilla by SRI become active. No new hook, widget, tooltip width, renderer patch, polling, save state, reward state, RNG path, or gameplay system is introduced.
+
+### Preserved invariants
+
+- 0.1.2 Russian and English strings remain byte-for-byte unchanged;
+- magnitude thresholds and grouping are locale-independent;
+- U+00A0 remains the atomic separator between point icon group and magnitude, and inside multi-word magnitude labels;
+- unsupported dynamic R/G/B outputs still fail safe to vanilla;
+- completed Study remains native;
+- exact reward quantities and decomposition outputs remain hidden;
+- Story and quest relevance remain out of scope.
+
+### Acceptance evidence
+
+Before handoff:
+- build-time tests must assert all eleven locale mappings and exact player-facing strings;
+- the production build must be clean;
+- existing reward-model threshold/grouping tests must remain green.
+
+Real-runtime acceptance after handoff:
+- use the already-proven in-game language switch;
+- visually smoke-test one ordinary unfinished Study in every newly enabled locale;
+- include an alchemy-capability item for representative Latin and CJK scripts when practical;
+- check clipping, missing glyphs, spacing, wrapping and overall native fit.
+
+This is a presentation/localization acceptance pass, not a new host-internals probe. No research harness is justified.
