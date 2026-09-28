@@ -116,33 +116,50 @@ No new probe is needed merely to prove that:
 5. Study can award more than blue points;
 6. a qualitative cue can conceptually be presentation-only without changing Study economics.
 
+## Full-dataset research completed — 2026-09-28
+
+The all-item Study/Survey distribution is now established from the accepted `StudySurveyDump 0.1.0` runtime evidence and normalized in:
+
+- `docs/STUDY_REWARD_DISTRIBUTION.md`
+- `research/data/study-survey-1.407-normalized.csv`
+
+Established:
+- 396 item -> Survey mappings;
+- 234 unique Survey crafts;
+- 11 `SurveySciencePoints` decomposition rows;
+- 223 ordinary one-time Study rows;
+- baseline positive reward coverage of 69 red / 108 green / 61 blue;
+- 12 genuinely multi-color baseline Study rows;
+- all 173 dynamic technology-point rows use the same conditional `buff_survay` +1 blue mechanism;
+- natural distribution gaps support color-specific threshold candidates rather than one shared numerical scale.
+
+The probe session's reward values are usable as vanilla 1.407 evidence: its dump completed before Better Grave Crafting Rewards applied its 23 G2 Study mutations, and Queue Everything! reported zero research-output halving.
+
 ## What remains open
 
-The next research stage must establish, from authoritative 1.407 evidence:
+Before production behavior can become READY:
 
-1. the **full native Study/Survey item set**, not just grave decorations;
-2. actual reward distributions for red, green, and blue across that set;
-3. multi-color Survey combinations and frequency;
-4. early/mid-game-important groups and the practical meaning of their reward magnitudes;
-5. whether tiny values such as 1 point should receive a qualitative label or no additional cue;
-6. natural threshold candidates per color, without assuming equal intervals or equal R/G/B scales;
-7. the narrowest robust presentation seam for adding the cue while preserving all native tooltip rows and completed-state behavior;
-8. exact localization/layout implications for the supported language set.
+1. accept the qualitative tier count and player-facing vocabulary;
+2. decide whether the smallest positive rewards should receive the lowest qualitative label or no extra cue;
+3. prove the narrowest robust presentation seam that preserves the native tooltip rows and completed state;
+4. prove how to read the effective/processed Survey values for the cue without consuming meaningful RNG or otherwise changing game state;
+5. establish localization/layout behavior for the supported language set.
+
+Exact Science cost per Study row was not captured by probe 0.1.0 because it lives on the workstation-resource path (`needs_from_wgo`). This does not block the current absolute-yield cue. It becomes relevant only if the product changes to a Faith/Science-efficiency ranking.
 
 ## Current production gate
 
 **BLOCKED**
 
-Reason: the product-level reward-band model and full all-item Study dataset are not yet established, and the final presentation/processed-value boundary has not yet been proved for the broader Study Reward Insight scope.
+Reason: the all-item reward distribution is now closed, but the qualitative product vocabulary and the final effective-output/presentation boundary are not yet accepted/proved.
 
 Allowed now:
-- static/data research;
-- analysis of already accepted runtime evidence;
-- a narrowly justified read-only probe only if existing evidence/direct inspection cannot produce the complete Study dataset;
-- UX trade study.
+- UX/product selection from the accepted reward distribution;
+- static inspection and narrowly justified presentation/effective-output research;
+- implementation planning behind an explicit evidence gate.
 
 Not allowed yet:
 - production tooltip mutation;
-- fixed reward thresholds presented as final;
+- thresholds presented as final before product acceptance;
 - item whitelist/category table;
 - grave-only or blue-only production behavior inherited from BGCR.
