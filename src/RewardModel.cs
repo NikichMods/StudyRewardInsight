@@ -154,7 +154,7 @@ namespace StudyRewardInsight
 
         internal static string MagnitudeLabel(
             RewardMagnitude magnitude,
-            TooltipLanguage)
+            TooltipLanguage language)
         {
             if (language == TooltipLanguage.Russian)
             {
