@@ -4,9 +4,9 @@
     <LangVersion>7.3</LangVersion>
     <AssemblyName>StudyRewardInsight</AssemblyName>
     <RootNamespace>StudyRewardInsight</RootNamespace>
-    <Version>0.1.2</Version>
-    <AssemblyVersion>0.1.2.0</AssemblyVersion>
-    <FileVersion>0.1.2.0</FileVersion>
+    <Version>0.2.0</Version>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+    <FileVersion>0.2.0.0</FileVersion>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Optimize>true</Optimize>
     <DebugType>none</DebugType>
@@ -21,6 +21,7 @@
     <Compile Include="src/Plugin.cs" />
     <Compile Include="src/GameApi.cs" />
     <Compile Include="src/RewardModel.cs" />
+    <Compile Include="src/TooltipLocalization.cs" />
     <Compile Include="src/StudyTooltip.cs" />
   </ItemGroup>
 
