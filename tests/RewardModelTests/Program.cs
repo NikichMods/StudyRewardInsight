@@ -11,12 +11,12 @@ namespace StudyRewardInsight
         private static int Main()
         {
             TestMagnitudeBoundaries();
+            TestLocaleResolution();
             TestMagnitudeLabels();
+            TestLocalizedBlocks();
             TestGroupingByMagnitude();
             TestSeparateMagnitudes();
             TestAtomicVeryHighGroups();
-            TestRussianAlchemyLine();
-            TestEnglishBlock();
 
             Console.WriteLine("RewardModel tests passed.");
             return 0;
@@ -47,25 +47,126 @@ namespace StudyRewardInsight
             AssertMagnitude("b", 66, RewardMagnitude.VeryHigh);
         }
 
+        private static void TestLocaleResolution()
+        {
+            AssertLocale("en", TooltipLanguage.English);
+            AssertLocale("de", TooltipLanguage.German);
+            AssertLocale("fr", TooltipLanguage.French);
+            AssertLocale("pt-br", TooltipLanguage.BrazilianPortuguese);
+            AssertLocale("es", TooltipLanguage.Spanish);
+            AssertLocale("ru", TooltipLanguage.Russian);
+            AssertLocale("it", TooltipLanguage.Italian);
+            AssertLocale("pl", TooltipLanguage.Polish);
+            AssertLocale("ja", TooltipLanguage.Japanese);
+            AssertLocale("zh_cn", TooltipLanguage.SimplifiedChinese);
+            AssertLocale("ko", TooltipLanguage.Korean);
+
+            AssertLocale("en-US", TooltipLanguage.English);
+            AssertLocale("ru_RU", TooltipLanguage.Russian);
+            AssertLocale("pt_BR", TooltipLanguage.BrazilianPortuguese);
+            AssertLocale("zh-Hans", TooltipLanguage.SimplifiedChinese);
+
+            TooltipLanguage ignored;
+            AssertEqual(
+                false,
+                TooltipLocalization.TryResolve("xx", out ignored),
+                "unsupported locale");
+        }
+
         private static void TestMagnitudeLabels()
         {
-            AssertEqual("Низкая", RewardModel.MagnitudeLabel(
-                RewardMagnitude.Low, TooltipLanguage.Russian), "Russian low label");
-            AssertEqual("Средняя", RewardModel.MagnitudeLabel(
-                RewardMagnitude.Medium, TooltipLanguage.Russian), "Russian medium label");
-            AssertEqual("Высокая", RewardModel.MagnitudeLabel(
-                RewardMagnitude.High, TooltipLanguage.Russian), "Russian high label");
-            AssertEqual("Очень высокая", RewardModel.MagnitudeLabel(
-                RewardMagnitude.VeryHigh, TooltipLanguage.Russian), "Russian very high label");
+            AssertLabels(
+                TooltipLanguage.English,
+                "Low", "Medium", "High", "Very High");
+            AssertLabels(
+                TooltipLanguage.German,
+                "Niedrig", "Mittel", "Hoch", "Sehr hoch");
+            AssertLabels(
+                TooltipLanguage.French,
+                "Faible", "Moyenne", "Élevée", "Très élevée");
+            AssertLabels(
+                TooltipLanguage.BrazilianPortuguese,
+                "Baixa", "Média", "Alta", "Muito alta");
+            AssertLabels(
+                TooltipLanguage.Spanish,
+                "Baja", "Media", "Alta", "Muy alta");
+            AssertLabels(
+                TooltipLanguage.Russian,
+                "Низкая", "Средняя", "Высокая", "Очень высокая");
+            AssertLabels(
+                TooltipLanguage.Italian,
+                "Bassa", "Media", "Alta", "Molto alta");
+            AssertLabels(
+                TooltipLanguage.Polish,
+                "Niska", "Średnia", "Wysoka", "Bardzo wysoka");
+            AssertLabels(
+                TooltipLanguage.Japanese,
+                "低い", "中程度", "高い", "非常に高い");
+            AssertLabels(
+                TooltipLanguage.SimplifiedChinese,
+                "低", "中", "高", "非常高");
+            AssertLabels(
+                TooltipLanguage.Korean,
+                "낮음", "중간", "높음", "매우 높음");
+        }
 
-            AssertEqual("Low", RewardModel.MagnitudeLabel(
-                RewardMagnitude.Low, TooltipLanguage.English), "English low label");
-            AssertEqual("Medium", RewardModel.MagnitudeLabel(
-                RewardMagnitude.Medium, TooltipLanguage.English), "English medium label");
-            AssertEqual("High", RewardModel.MagnitudeLabel(
-                RewardMagnitude.High, TooltipLanguage.English), "English high label");
-            AssertEqual("Very High", RewardModel.MagnitudeLabel(
-                RewardMagnitude.VeryHigh, TooltipLanguage.English), "English very high label");
+        private static void TestLocalizedBlocks()
+        {
+            AssertLocalizedBlock(
+                TooltipLanguage.English,
+                "Study reward:",
+                "High",
+                "Studying unlocks an alchemy use.");
+            AssertLocalizedBlock(
+                TooltipLanguage.German,
+                "Forschungsbelohnung:",
+                "Hoch",
+                "Nach der Untersuchung kann dieser Gegenstand in der Alchemie verwendet werden.");
+            AssertLocalizedBlock(
+                TooltipLanguage.French,
+                "Récompense d'étude:",
+                "Élevée",
+                "L'étude permettra d'utiliser cet objet en alchimie.");
+            AssertLocalizedBlock(
+                TooltipLanguage.BrazilianPortuguese,
+                "Recompensa por estudo:",
+                "Alta",
+                "O estudo permitirá usar este item em alquimia.");
+            AssertLocalizedBlock(
+                TooltipLanguage.Spanish,
+                "Recompensa de estudio:",
+                "Alta",
+                "El estudio permitirá usar este objeto en alquimia.");
+            AssertLocalizedBlock(
+                TooltipLanguage.Russian,
+                "Награда за исследование:",
+                "Высокая",
+                "Исследование позволит использовать этот предмет в алхимии.");
+            AssertLocalizedBlock(
+                TooltipLanguage.Italian,
+                "Ricompensa dello studio:",
+                "Alta",
+                "Lo studio permetterà di usare questo oggetto in alchimia.");
+            AssertLocalizedBlock(
+                TooltipLanguage.Polish,
+                "Nagroda za badanie:",
+                "Wysoka",
+                "Zbadanie pozwoli używać tego przedmiotu w alchemii.");
+            AssertLocalizedBlock(
+                TooltipLanguage.Japanese,
+                "研究報酬:",
+                "高い",
+                "研究すると、このアイテムを錬金術に使用できます。");
+            AssertLocalizedBlock(
+                TooltipLanguage.SimplifiedChinese,
+                "研究奖励:",
+                "高",
+                "研究后可将此物品用于炼金术。");
+            AssertLocalizedBlock(
+                TooltipLanguage.Korean,
+                "연구 보상:",
+                "높음",
+                "연구하면 이 아이템을 연금술에 사용할 수 있습니다.");
         }
 
         private static void TestGroupingByMagnitude()
@@ -110,7 +211,10 @@ namespace StudyRewardInsight
                 + AtomicGap
                 + "Средняя";
 
-            AssertEqual(expected, actual, "different magnitudes stay separate");
+            AssertEqual(
+                expected,
+                actual,
+                "different magnitudes stay separate");
         }
 
         private static void TestAtomicVeryHighGroups()
@@ -120,36 +224,35 @@ namespace StudyRewardInsight
                 Blue = 66
             };
 
-            string russian = RewardModel.BuildBlock(
-                snapshot,
-                false,
-                TooltipLanguage.Russian);
+            foreach (TooltipLanguage language in
+                (TooltipLanguage[])Enum.GetValues(typeof(TooltipLanguage)))
+            {
+                string label = RewardModel.MagnitudeLabel(
+                    RewardMagnitude.VeryHigh,
+                    language);
+                string expected =
+                    TooltipLocalization.Heading(language)
+                    + " (b)"
+                    + AtomicGap
+                    + label.Replace(" ", AtomicGap);
 
-            string english = RewardModel.BuildBlock(
-                snapshot,
-                false,
-                TooltipLanguage.English);
+                string actual = RewardModel.BuildBlock(
+                    snapshot,
+                    false,
+                    language);
 
-            AssertEqual(
-                "Награда за исследование: (b)"
-                + AtomicGap
-                + "Очень"
-                + AtomicGap
-                + "высокая",
-                russian,
-                "Russian icon plus two-word label is atomic");
-
-            AssertEqual(
-                "Study reward: (b)"
-                + AtomicGap
-                + "Very"
-                + AtomicGap
-                + "High",
-                english,
-                "English icon plus two-word label is atomic");
+                AssertEqual(
+                    expected,
+                    actual,
+                    language + " atomic very-high group");
+            }
         }
 
-        private static void TestRussianAlchemyLine()
+        private static void AssertLocalizedBlock(
+            TooltipLanguage language,
+            string heading,
+            string highLabel,
+            string alchemyLine)
         {
             RewardSnapshot snapshot = new RewardSnapshot
             {
@@ -159,36 +262,66 @@ namespace StudyRewardInsight
             string actual = RewardModel.BuildBlock(
                 snapshot,
                 true,
-                TooltipLanguage.Russian);
+                language);
 
             string expected =
-                "Награда за исследование: (b)"
+                heading
+                + " (b)"
                 + AtomicGap
-                + "Высокая\n"
-                + "Исследование позволит использовать этот предмет в алхимии.";
+                + highLabel.Replace(" ", AtomicGap)
+                + "\n"
+                + alchemyLine;
 
-            AssertEqual(expected, actual, "Russian alchemy capability line");
+            AssertEqual(
+                expected,
+                actual,
+                language + " localized block");
         }
 
-        private static void TestEnglishBlock()
+        private static void AssertLabels(
+            TooltipLanguage language,
+            string low,
+            string medium,
+            string high,
+            string veryHigh)
         {
-            RewardSnapshot snapshot = new RewardSnapshot
-            {
-                Blue = 45
-            };
+            AssertEqual(
+                low,
+                RewardModel.MagnitudeLabel(
+                    RewardMagnitude.Low,
+                    language),
+                language + " low label");
+            AssertEqual(
+                medium,
+                RewardModel.MagnitudeLabel(
+                    RewardMagnitude.Medium,
+                    language),
+                language + " medium label");
+            AssertEqual(
+                high,
+                RewardModel.MagnitudeLabel(
+                    RewardMagnitude.High,
+                    language),
+                language + " high label");
+            AssertEqual(
+                veryHigh,
+                RewardModel.MagnitudeLabel(
+                    RewardMagnitude.VeryHigh,
+                    language),
+                language + " very-high label");
+        }
 
-            string actual = RewardModel.BuildBlock(
-                snapshot,
-                true,
-                TooltipLanguage.English);
+        private static void AssertLocale(
+            string locale,
+            TooltipLanguage expected)
+        {
+            TooltipLanguage actual;
+            bool supported = TooltipLocalization.TryResolve(
+                locale,
+                out actual);
 
-            string expected =
-                "Study reward: (b)"
-                + AtomicGap
-                + "High\n"
-                + "Studying unlocks an alchemy use.";
-
-            AssertEqual(expected, actual, "English block");
+            AssertEqual(true, supported, locale + " supported");
+            AssertEqual(expected, actual, locale + " mapping");
         }
 
         private static void AssertMagnitude(
