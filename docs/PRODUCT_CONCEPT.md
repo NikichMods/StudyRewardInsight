@@ -2,7 +2,7 @@
 
 Target: **Graveyard Keeper 1.407**
 
-Status: **Russian product model implemented in candidate 0.1.1; real-runtime visual acceptance and non-Russian localization remain open**
+Status: **Russian and English wording accepted for candidate 0.1.2; atomic reward-group wrapping and real-runtime visual acceptance remain open**
 
 ## Product problem
 
@@ -18,8 +18,7 @@ It intentionally does **not** communicate the point quantity.
 Player-facing uncertainty is therefore not just "what color do I get?". The important unanswered questions are:
 
 1. roughly how large is the hidden technology-point reward?
-2. is that reward unusually good or poor for the Faith being spent?
-3. does Study unlock an additional alchemical use for this item?
+2. does Study unlock an additional alchemical use for this item?
 
 The mod should answer those questions without turning Study into a wiki lookup or an automatic recommendation engine.
 
@@ -38,10 +37,8 @@ It should describe **properties of the Study result**, not decide whether the pl
 For every positive R/G/B Study reward, show a qualitative magnitude associated with that color.
 
 Accepted four-tier player-facing vocabulary:
-- **Низкая**;
-- **Средняя**;
-- **Высокая**;
-- **Очень высокая**.
+- Russian: **Низкая / Средняя / Высокая / Очень высокая**;
+- English: **Low / Medium / High / Very High**.
 
 Accepted color-specific boundaries:
 - red: 1–12 / 13–40 / 41–75 / 76+;
@@ -75,8 +72,9 @@ Accepted product decision:
 
 Accepted runtime evidence establishes that 62 / 223 ordinary Study definitions unlock at least one native alchemical decomposition path.
 
-For those unstudied items, show the accepted short capability cue:
-- **Открывает алхимическое разложение.**
+For those unstudied items, show a direct capability cue:
+- Russian: **Исследование позволит использовать этот предмет в алхимии.**
+- English: **Studying unlocks an alchemy use.**
 
 Do **not** reveal before Study:
 - the exact alchemical element;
@@ -191,17 +189,25 @@ Relevant principle:
 
 Before an incomplete Study, the predictive block is conceptually:
 
+Russian:
 `Награда за исследование: [point icon(s)] [magnitude]`
 `[second reward row only if another color group has a different magnitude]`
-`Открывает алхимическое разложение.` — only when applicable.
+`Исследование позволит использовать этот предмет в алхимии.` — only when applicable.
+
+English:
+`Study reward: [point icon(s)] [magnitude]`
+`[second reward row only if another color group has a different magnitude]`
+`Studying unlocks an alchemy use.` — only when applicable.
 
 Rules:
-- every ordinary Study gets a magnitude assessment: **Низкая / Средняя / Высокая / Очень высокая**;
-- the first reward group stays on the same line as `Награда за исследование:` when the native tooltip width permits;
+- every ordinary Study gets a magnitude assessment using the accepted four-tier scale for the active supported language;
+- the first reward group stays on the same line as the Study-reward heading when the native tooltip width permits;
+- each complete reward group — its point icon(s) plus its qualitative label, including two-word labels such as **Очень высокая / Very High** — must wrap as one visual unit;
+- if the first group does not fit after the heading, the whole group may move to the next centered line; the icon must not remain separated from its label;
 - equal magnitudes across colors are collapsed into one group;
 - different magnitudes remain separate rows;
 - no relative generosity/stinginess modifier is shown;
-- the alchemy cue is a separate capability line;
+- the alchemy cue is a separate explanatory sentence and may wrap naturally;
 - the native incomplete-Study row may be replaced/restructured rather than preserved literally, provided the resulting block still communicates pending Study and the reward color(s) clearly;
 - exact point quantities, exact alchemy results, and Faith-efficiency formulas remain hidden.
 
@@ -210,8 +216,8 @@ After completed Study:
 - preserve vanilla completed behavior.
 
 The current vanilla dataset yields:
-- 217 / 223 Study definitions (97.3%) require only one reward row after color collapsing under the original assessment model; the simplified magnitude-only grouping can only reduce, never increase, the number of split rows;
-- 62 / 223 (27.8%) receive the additional alchemy line.
+- 217 / 223 Study definitions (97.3%) required only one reward row under the original stricter grouping model; magnitude-only grouping can only reduce, never increase, the number of split reward rows;
+- 62 / 223 (27.8%) receive the additional alchemy sentence.
 
 ## Questions the mod should answer
 
@@ -236,22 +242,26 @@ The current vanilla dataset yields:
 
 ## Remaining open product questions
 
-The Russian core product model is accepted for the next runtime candidate:
-- four magnitude labels and their color-specific thresholds;
+Accepted for candidate 0.1.2:
+- Russian scale: **Низкая / Средняя / Высокая / Очень высокая**;
+- English scale: **Low / Medium / High / Very High**;
+- Russian heading: **Награда за исследование:**;
+- English heading: **Study reward:**;
+- Russian alchemy cue: **Исследование позволит использовать этот предмет в алхимии.**;
+- English alchemy cue: **Studying unlocks an alchemy use.**;
+- reward icons and their magnitude label wrap as one visual unit;
 - no player-facing relative generosity/stinginess modifier;
-- first reward group inline with the Study heading;
-- color grouping by magnitude;
-- the alchemy capability cue.
+- color grouping by magnitude.
 
 Still open:
-1. localization wording across supported languages;
-2. real-runtime visual acceptance of the compact one-line-first-group layout, split rows, and alchemy cue.
+1. localization wording for the remaining supported game languages;
+2. real-runtime visual acceptance of atomic reward-group wrapping, Russian alchemy wording, and English presentation.
 
 ## Remaining engineering questions
 
 The production owner/data-path questions are closed for the current Russian candidate. The selected implementation remains the narrow postfix/read-only native-data path documented in `docs/PRODUCTION_EVIDENCE_GATE.md`.
 
-No new host/runtime probe is required for candidate 0.1.1. Remaining work is:
-1. real-runtime visual acceptance of the compact presentation;
-2. localization design/gates before enabling non-Russian languages;
+No new broad host/runtime probe is required for candidate 0.1.2. Remaining work is:
+1. real-runtime visual acceptance of the atomic reward group and revised Russian/English wording;
+2. localization design/gates for languages other than Russian and English;
 3. normal candidate-to-stable integration only after applicable acceptance evidence is recorded.
