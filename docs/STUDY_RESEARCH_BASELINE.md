@@ -98,11 +98,12 @@ BGCR explored a grave-only cue with these candidate properties:
 - likely extend the existing Survey text row rather than replace the tooltip.
 
 For Study Reward Insight:
-- the **native-row + short qualitative line** family remains a preferred direction;
-- the **effective-output** principle remains desirable for compatibility;
-- the four historical blue thresholds are **not accepted**;
+- the historical **native-row + short qualitative line** layout is no longer a requirement;
+- the native incomplete-Study row may be replaced/restructured when the accepted Study Reward Insight block preserves its semantics more clearly;
+- the **effective-output** principle remains desirable for compatibility, but must not force a broader or state-mutating mechanism when a simpler safe reward source satisfies the accepted product envelope;
+- the historical BGCR blue thresholds are rejected;
 - grave-only filtering is explicitly rejected as the default product scope;
-- blue-only semantics are explicitly insufficient unless later evidence justifies them;
+- blue-only semantics are explicitly insufficient;
 - the exact Harmony/row-identification mechanism remains unselected until its evidence gate is READY.
 
 ## What prior evidence already closes
@@ -137,13 +138,12 @@ The probe session's reward values are usable as vanilla 1.407 evidence: its dump
 
 ## What remains open
 
-Before production behavior can become READY:
+The product semantics are now accepted. Before production behavior can become READY:
 
-1. accept the qualitative tier count and player-facing vocabulary;
-2. decide whether the smallest positive rewards should receive the lowest qualitative label or no extra cue;
-3. prove the narrowest robust presentation seam that preserves the native tooltip rows and completed state;
-4. prove how to read the effective/processed Survey values for the cue without consuming meaningful RNG or otherwise changing game state;
-5. establish localization/layout behavior for the supported language set.
+1. prove the narrowest robust presentation seam that can restructure the incomplete-Study block while preserving unrelated tooltip rows and the native completed state;
+2. choose and prove the least-complex safe reward read model, including the known vanilla Circumspect +1-blue case, without consuming meaningful RNG or changing game state;
+3. establish real-runtime layout/wrapping acceptance for the Russian block;
+4. establish localization behavior for the supported language set.
 
 Exact Science cost per Study row was not captured by probe 0.1.0 because it lives on the workstation-resource path (`needs_from_wgo`). This does not block the current absolute-yield cue. It becomes relevant only if the product changes to a Faith/Science-efficiency ranking.
 
@@ -151,15 +151,13 @@ Exact Science cost per Study row was not captured by probe 0.1.0 because it live
 
 **BLOCKED**
 
-Reason: the all-item reward distribution is now closed, but the qualitative product vocabulary and the final effective-output/presentation boundary are not yet accepted/proved.
+Reason: product vocabulary, magnitude thresholds, exception thresholds, grouping, and alchemy wording are accepted; the final reward-read and presentation boundaries are not yet proved.
 
 Allowed now:
-- UX/product selection from the accepted reward distribution;
-- static inspection and narrowly justified presentation/effective-output research;
+- static inspection and narrowly justified presentation/reward-read research;
 - implementation planning behind an explicit evidence gate.
 
 Not allowed yet:
 - production tooltip mutation;
-- thresholds presented as final before product acceptance;
 - item whitelist/category table;
 - grave-only or blue-only production behavior inherited from BGCR.
