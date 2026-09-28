@@ -2,7 +2,7 @@
 
 Target: **Graveyard Keeper 1.407**
 
-Status: **Russian and English wording accepted for candidate 0.1.2; atomic reward-group wrapping and real-runtime visual acceptance remain open**
+Status: **candidate 0.1.2 is CI-green; Russian/English real-runtime visual acceptance and remaining-language localization remain open**
 
 ## Product problem
 
