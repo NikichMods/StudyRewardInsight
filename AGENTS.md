@@ -37,7 +37,7 @@ Before Study, preserve the **semantics** of the native incomplete-Study state, b
 
 Do not hardcode an item-type whitelist or an `item ID -> category` table unless evidence shows it is necessary and preferable.
 
-The accepted Russian reward scale is **Небольшая / Умеренная / Большая / Очень большая** with color-specific thresholds documented in `docs/PRODUCT_CONCEPT.md`. Unusual paid-Study return is shown only as **щедрее обычного / скупее обычного** at the accepted thresholds there. Treat future changes to those semantics as product changes, not implementation details.
+The accepted Russian reward scale is **Низкая / Средняя / Высокая / Очень высокая** with color-specific thresholds documented in `docs/PRODUCT_CONCEPT.md`. The player-facing tooltip does **not** show the former relative `щедрее обычного / скупее обычного` modifier; its underlying research remains historical evidence only. Treat future changes to those semantics as product changes, not implementation details.
 
 ## Mandatory project-specific start-of-work checks
 
