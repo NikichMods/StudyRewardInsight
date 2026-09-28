@@ -1,0 +1,79 @@
+name: Publish accepted release
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/release/accepted-release.env'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: publish-accepted-release
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout release metadata
+        uses: actions/checkout@v4
+
+      - name: Read accepted identity
+        id: accepted
+        shell: bash
+        run: |
+          set -euo pipefail
+          source .github/release/accepted-release.env
+          {
+            echo "version=$VERSION"
+            echo "source_sha=$SOURCE_SHA"
+            echo "run_id=$RUN_ID"
+            echo "artifact_name=$ARTIFACT_NAME"
+            echo "dll_sha256=$DLL_SHA256"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Download exact accepted artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ steps.accepted.outputs.artifact_name }}
+          path: accepted
+          run-id: ${{ steps.accepted.outputs.run_id }}
+          github-token: ${{ github.token }}
+
+      - name: Verify accepted DLL identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          dll="accepted/StudyRewardInsight.dll"
+          test -f "$dll"
+          actual="$(sha256sum "$dll" | awk '{print $1}')"
+          expected="${{ steps.accepted.outputs.dll_sha256 }}"
+          test "$actual" = "$expected"
+          grep -F "candidate_version=${{ steps.accepted.outputs.version }}" accepted/BUILD_IDENTITY.txt
+          grep -F "source_sha=${{ steps.accepted.outputs.source_sha }}" accepted/BUILD_IDENTITY.txt
+          grep -F "sha256=$expected" accepted/BUILD_IDENTITY.txt
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.accepted.outputs.version }}
+          SOURCE_SHA: ${{ steps.accepted.outputs.source_sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          tag="v$VERSION"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            echo "Release $tag already exists; refusing to overwrite it."
+            exit 1
+          fi
+          gh release create "$tag" accepted/StudyRewardInsight.dll \
+            --target "$SOURCE_SHA" \
+            --title "Study Reward Insight v$VERSION" \
+            --notes "First stable release. Adds qualitative Study reward previews in Russian and English, keeps reward icon groups together when wrapping, and indicates when studying unlocks an alchemy use without revealing exact rewards or decomposition results."
