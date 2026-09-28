@@ -10,6 +10,7 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="../../src/RewardModel.cs" Link="RewardModel.cs" />
+    <Compile Include="../../src/TooltipLocalization.cs" Link="TooltipLocalization.cs" />
   </ItemGroup>
 
   <ItemGroup>
