@@ -38,10 +38,10 @@ It should describe **properties of the Study result**, not decide whether the pl
 For every positive R/G/B Study reward, show a qualitative magnitude associated with that color.
 
 Accepted four-tier player-facing vocabulary:
-- **Небольшая**;
-- **Умеренная**;
-- **Большая**;
-- **Очень большая**.
+- **Низкая**;
+- **Средняя**;
+- **Высокая**;
+- **Очень высокая**.
 
 Accepted color-specific boundaries:
 - red: 1–12 / 13–40 / 41–75 / 76+;
@@ -59,37 +59,24 @@ Why always:
 - it works for zero-Faith Study;
 - it preserves multi-color tradeoffs instead of inventing a combined score.
 
-### 2. Unusual Faith efficiency — compact exception modifier
+### 2. Relative Faith-efficiency modifier — researched, not player-facing
 
-Faith efficiency is a separate property from absolute reward magnitude, but the tooltip should **not mention Faith explicitly** and should not introduce a technical efficiency label.
+The Study/Faith efficiency analysis remains valid research and is preserved in `docs/STUDY_FAITH_EFFICIENCY.md` and related model history.
 
-Do **not** combine colors into one efficiency score.
+Runtime UX review showed that the exception wording `щедрее обычного / скупее обычного` reads as an authorial aside rather than a neutral game-system label and makes otherwise compact reward rows visually unstable.
 
-Accepted presentation:
-- when a rewarded color is close to the host's ordinary ~10-points-per-Faith return, show **no modifier**;
-- below 7.5 points per Faith, append **"скупее обычного"**;
-- from 7.5 through 12.5 points per Faith, show **no modifier**;
-- above 12.5 points per Faith, append **"щедрее обычного"**;
-- associate the modifier with the specific technology-point color;
-- if multiple colors have the same magnitude tier and the same modifier, collapse their icons into one row.
-
-These cutoffs fall in natural gaps in the observed vanilla paid-Study efficiency distributions rather than splitting populated vanilla values.
-
-At these accepted boundaries:
-- 30 / 223 ordinary Study definitions (13.5%) have at least one unusual return;
-- therefore 193 / 223 (86.5%) show no efficiency modifier at all;
-- among paid Study only, 30 / 178 (16.9%) have an exception marker.
-
-The modifier is intentionally a light "wink", not a formula. The tooltip does not mention Faith, cost, efficiency, payoff, or a numerical norm. Internally the modifier is derived from reward-per-Faith; player-facing language stays entirely in the language of how generous or stingy this Study result is relative to ordinary Study rewards.
-
-Zero-Faith Study receives no efficiency modifier.
+Accepted product decision:
+- do **not** show a relative generosity/stinginess modifier;
+- do **not** compute Faith efficiency in production merely for an invisible cue;
+- keep the research data as historical evidence for future product work;
+- group reward colors by displayed magnitude only.
 
 ### 3. Alchemical decomposition unlock — when applicable
 
 Accepted runtime evidence establishes that 62 / 223 ordinary Study definitions unlock at least one native alchemical decomposition path.
 
 For those unstudied items, show the accepted short capability cue:
-- **После изучения сгодится для алхимии.**
+- **Открывает алхимическое разложение.**
 
 Do **not** reveal before Study:
 - the exact alchemical element;
@@ -204,28 +191,26 @@ Relevant principle:
 
 Before an incomplete Study, the predictive block is conceptually:
 
-`Награда за исследование:`
-`[point icon(s)] [magnitude] [optional exception modifier]`
-`[second reward row only if another color group differs]`
-`После изучения сгодится для алхимии.` — only when applicable.
+`Награда за исследование: [point icon(s)] [magnitude]`
+`[second reward row only if another color group has a different magnitude]`
+`Открывает алхимическое разложение.` — only when applicable.
 
 Rules:
-- every ordinary Study gets a magnitude assessment: **Небольшая / Умеренная / Большая / Очень большая**;
-- the exception modifier is absent for ordinary efficiency and appears only as **щедрее обычного / скупее обычного**;
-- the modifier follows the magnitude after a comma;
-- equal complete assessments across colors are collapsed into one row;
-- different assessments remain separate rows;
+- every ordinary Study gets a magnitude assessment: **Низкая / Средняя / Высокая / Очень высокая**;
+- the first reward group stays on the same line as `Награда за исследование:` when the native tooltip width permits;
+- equal magnitudes across colors are collapsed into one group;
+- different magnitudes remain separate rows;
+- no relative generosity/stinginess modifier is shown;
 - the alchemy cue is a separate capability line;
 - the native incomplete-Study row may be replaced/restructured rather than preserved literally, provided the resulting block still communicates pending Study and the reward color(s) clearly;
-- exact point quantities, exact alchemy results, and explicit Faith-efficiency formulas remain hidden.
+- exact point quantities, exact alchemy results, and Faith-efficiency formulas remain hidden.
 
 After completed Study:
 - remove all predictive cues;
 - preserve vanilla completed behavior.
 
 The current vanilla dataset yields:
-- 217 / 223 Study definitions (97.3%) require only one reward row after color collapsing;
-- 6 / 223 (2.7%) require two reward rows;
+- 217 / 223 Study definitions (97.3%) require only one reward row after color collapsing under the original assessment model; the simplified magnitude-only grouping can only reduce, never increase, the number of split rows;
 - 62 / 223 (27.8%) receive the additional alchemy line.
 
 ## Questions the mod should answer
@@ -236,10 +221,7 @@ The current vanilla dataset yields:
 2. **Roughly how much will I get?**
    - Study Reward Insight: qualitative magnitude.
 
-3. **Is this an unusual use of my Faith for that color?**
-   - Study Reward Insight: exception-only Faith return.
-
-4. **Will studying this item unlock an alchemical use?**
+3. **Will studying this item unlock an alchemical use?**
    - Study Reward Insight: yes/no capability only.
 
 ## Questions the mod should deliberately not answer
@@ -254,16 +236,16 @@ The current vanilla dataset yields:
 
 ## Remaining open product questions
 
-The Russian core product model is accepted:
+The Russian core product model is accepted for the next runtime candidate:
 - four magnitude labels and their color-specific thresholds;
-- exception thresholds and the `щедрее обычного / скупее обычного` wording;
-- comma-separated modifier syntax;
-- color grouping behavior;
+- no player-facing relative generosity/stinginess modifier;
+- first reward group inline with the Study heading;
+- color grouping by magnitude;
 - the alchemy capability cue.
 
 Still open:
 1. localization wording across supported languages;
-2. visual acceptance of wrapping, spacing, and one-row/two-row grouping in the real item tooltip.
+2. real-runtime visual acceptance of the compact one-line-first-group layout, split rows, and alchemy cue.
 
 ## Remaining engineering questions
 
