@@ -6,7 +6,7 @@ namespace StudyRewardInsight
 {
     internal static class Program
     {
-        private const string AtomicGap = "\u2009\u2009";
+        private const string AtomicGap = "\u00A0";
 
         private static int Main()
         {
