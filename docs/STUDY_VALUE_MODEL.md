@@ -2,7 +2,7 @@
 
 Target: **Graveyard Keeper 1.407**
 
-Status: **research / product design; production behavior remains BLOCKED**
+Status: **accepted product model; production behavior remains BLOCKED pending implementation evidence gates**
 
 ## Product outcome
 
@@ -23,7 +23,7 @@ The mod should inform the decision, not make it for the player.
 
 Accepted all-item runtime evidence establishes 223 ordinary Study crafts and separate R/G/B reward distributions.
 
-A four-band magnitude model remains the leading candidate because the vanilla distributions contain natural gaps and the colors require different numerical thresholds.
+The accepted four-band magnitude model is **Небольшая / Умеренная / Большая / Очень большая**, with the color-specific thresholds recorded in `docs/PRODUCT_CONCEPT.md` and `docs/STUDY_REWARD_DISTRIBUTION.md`.
 
 ### 2. Faith efficiency
 
@@ -99,11 +99,11 @@ Most red/green Studies sit on the host's normal 10-points-per-Faith line, so rep
 
 ### C. Absolute reward + exception-oriented Faith efficiency + alchemy signal
 
-Leading family.
+**Accepted family.**
 
 Always:
-- preserve vanilla Study line;
-- add qualitative magnitude for each positive technology-point color.
+- preserve the semantics of pending Study, but the literal vanilla incomplete-Study row may be replaced/restructured;
+- show qualitative magnitude for each positive red/green/blue reward.
 
 Only when useful:
 - add a Faith-efficiency qualifier for colors materially outside the ordinary host band;
@@ -141,27 +141,18 @@ Show only Faith-normalized value and omit absolute magnitude.
 
 A 20-blue/1-Faith Study and 100-blue/10-Faith Study answer different needs. The user explicitly values both total payoff and resource efficiency.
 
-## Working Faith-efficiency model
+## Accepted Faith-efficiency exception model
 
-Because the dominant host norm is shared across colors, a **common normalized efficiency scale** is more defensible than separate R/G/B thresholds.
+The dominant host reference is approximately 10 points of a given color per Faith. The player-facing tooltip does not mention Faith or the ratio.
 
-Working candidate, not accepted behavior:
+Accepted boundaries:
+- **< 7.5 points/Faith:** append `скупее обычного`;
+- **7.5–12.5 inclusive:** no modifier;
+- **> 12.5 points/Faith:** append `щедрее обычного`.
 
-- **Low return:** < 0.75× the 10-points/Faith host norm;
-- **Normal return:** 0.75×–1.25×;
-- **High return:** >1.25× and <2×;
-- **Exceptional return:** ≥2×.
+These boundaries fall in natural gaps in the observed vanilla paid-Study ratios. Zero-Faith Study receives no modifier.
 
-This places observed values approximately as:
-
-- low: 2.5 / 3.33 / 3.75 / 5 / 6 / 6.25 points per Faith;
-- normal: 7.5 through 12.5;
-- high: 14.29 / 15 / 16.67;
-- exceptional: 20 / 22.5 / 25.
-
-Player-facing UI would use words only, not these numeric thresholds.
-
-A stricter exception-oriented presentation could omit the **Normal** label entirely and show only low/high/exceptional deviations.
+The magnitude label and modifier remain separate semantics: magnitude describes absolute reward size; the modifier is only a rare relative generosity/stinginess cue.
 
 ## Multi-color implication
 
@@ -175,40 +166,33 @@ Examples from accepted data:
 
 This is strong evidence against a single overall "efficiency" line unless the line can encode color association unambiguously.
 
-## Working UX shape
+## Accepted UX shape
 
-Not accepted wording; conceptual example only.
+Conceptual Russian block:
 
-Single-color ordinary item:
-- native Study line;
-- `Blue reward: Moderate`
+`Награда за исследование:`
+`[point icon(s)] Небольшая / Умеренная / Большая / Очень большая[, щедрее обычного / скупее обычного]`
+`[second reward row only when another color group differs]`
+`После изучения сгодится для алхимии.` — only when applicable.
 
-Single-color unusually efficient item:
-- native Study line;
-- `Blue reward: Moderate · Faith return: Exceptional`
+Equal colors are grouped only when their complete displayed assessment matches.
 
-Multi-color item:
-- native Study line;
-- one compact entry per rewarded color when needed, e.g. red and blue magnitude + return.
+## Accepted Russian wording
 
-Alchemy-capable item:
-- separate short signal such as `Study unlocks alchemical decomposition`.
+Magnitude:
+- `Небольшая`
+- `Умеренная`
+- `Большая`
+- `Очень большая`
 
-The alchemy signal should describe a **verified capability**, not a vague "interesting for alchemy" recommendation.
+Rare modifier:
+- `щедрее обычного`
+- `скупее обычного`
 
-## Wording direction
+Alchemy:
+- `После изучения сгодится для алхимии.`
 
-Absolute magnitude:
-- clear baseline: `Low / Moderate / High / Very high`;
-- more atmospheric candidate: `Minor / Moderate / Significant / Exceptional`.
-
-Avoid language such as "valuable" or "worthwhile" on the magnitude line because those words imply total utility rather than only point yield.
-
-Faith-normalized dimension:
-- prefer a semantic noun such as `Faith return` / `Return`;
-- candidate levels: `Low / Normal / High / Exceptional`.
-
-Final localization wording requires UI/layout testing and all supported game languages.
+The primary scale is intentionally maximally transparent. Character is carried by the exception/alchemy wording rather than by ambiguous magnitude adjectives.
 
 ## 0.2.0 evidence closure
 
@@ -223,29 +207,16 @@ Closed facts:
 
 Story is therefore real Study value, but conditional and not a good default tooltip axis. The core model remains magnitude + Faith return + decomposition capability.
 
-## Quest relevance as a separate signal
+## Quest relevance
 
-A further player-value axis is now in research: whether an unstudied item's decomposition route can help satisfy an **already-visible current task** through recipes the player already knows.
+Quest/current-task relevance was investigated and is explicitly **out of scope** for Study Reward Insight. It is a neighboring product problem and must not expand this mod's architecture.
 
-This is deliberately not part of the Study reward score. It is a current-save relevance signal.
+## Remaining work
 
-Leading no-spoiler rule:
-- current Visible task only;
-- task requirement recovered from authored current-task data;
-- traverse only recipes the current save already exposes;
-- allow the final hidden edge to be the uncompleted Study-gated decomposition;
-- display only a generic hint, not the quest, recipe, ingredient, or decomposition result.
+The core Russian product model is accepted. Remaining work is engineering and localization:
+- prove the least-complex safe reward-read path;
+- prove the narrowest incomplete-Study tooltip replacement seam;
+- visually accept layout/wrapping in real runtime;
+- localize the accepted semantics for supported languages.
 
-See `docs/QUEST_RELEVANCE_RESEARCH.md`.
-
-## Remaining product decisions
-
-Production remains **BLOCKED** pending presentation decisions and the quest-relevance owner proof.
-
-Still open:
-- whether Faith return should be displayed always or only for meaningful deviations from the host norm;
-- exact wording and compact multi-color presentation;
-- whether the alchemy capability cue should be text, icon+text, or folded into a compact secondary line;
-- whether Story should remain intentionally omitted;
-- whether a Study Table-specific augmentation is necessary after tooltip layout testing;
-- exact current-task requirement owner/data path for the no-spoiler quest-relevance signal.
+Production remains **BLOCKED** until the applicable engineering evidence gates are READY.
