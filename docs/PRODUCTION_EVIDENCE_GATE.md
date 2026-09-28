@@ -313,7 +313,11 @@ Only spacing inside SRI-owned reward groups changes. No tooltip width, alignment
 
 **Acceptance evidence**
 
-NGUI source inspection shows ordinary ASCII spaces act as word-wrap boundaries while the bitmap-font path explicitly renders U+2009 THIN SPACE via the normal space glyph at half advance. Candidate 0.1.2 will use two thin spaces for approximately normal visual spacing inside the atomic reward group, including inside `Очень высокая` / `Very High`. Formatter tests can prove the string structure; the user's real-runtime view remains the final visual acceptance. No dedicated harness is justified.
+Candidate 0.1.1 runtime screenshots directly prove the ordinary-space split. Follow-up NGUI source verification also closes an implementation trap before handoff: `NGUIText.IsSpace` explicitly classifies U+2009 THIN SPACE as a wrap boundary, so thin space is **not** a valid atomic separator despite its half-width rendering support.
+
+The selected candidate mechanism is U+00A0 NO-BREAK SPACE inside the reward group. In the inspected NGUI wrapping algorithm, U+00A0 is not classified by `IsSpace`, so it does not create a normal word-wrap boundary. Its exact visible advance remains font-dependent; that is a presentation property for the already-required real-runtime visual check. If the bundled font gives it no advance, the safe failure is a tighter icon/label gap rather than a split group or gameplay mutation.
+
+Formatter tests prove that reward-group gaps use U+00A0 rather than U+0020, including inside `Очень высокая` / `Very High`. No dedicated harness is justified.
 
 ## Gate H — English player-facing wording
 
