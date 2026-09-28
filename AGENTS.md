@@ -33,11 +33,11 @@ The mod must not change:
 - progression order;
 - unrelated economy.
 
-Before Study, preserve the native Study status and prefer one short additional qualitative reward line. After completed Study, preserve the native completed state without a forecast.
+Before Study, preserve the **semantics** of the native incomplete-Study state, but the literal native Study row may be replaced or restructured when the accepted Study Reward Insight block communicates that information more clearly. After completed Study, preserve the native completed state without a forecast.
 
 Do not hardcode an item-type whitelist or an `item ID -> category` table unless evidence shows it is necessary and preferable.
 
-Exact reward-band count, labels, and thresholds are product/research decisions, not fixed project constants. Red, green, and blue may require different thresholds.
+The accepted Russian reward scale is **Небольшая / Умеренная / Большая / Очень большая** with color-specific thresholds documented in `docs/PRODUCT_CONCEPT.md`. Unusual paid-Study return is shown only as **щедрее обычного / скупее обычного** at the accepted thresholds there. Treat future changes to those semantics as product changes, not implementation details.
 
 ## Mandatory project-specific start-of-work checks
 
