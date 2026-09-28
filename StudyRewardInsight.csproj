@@ -22,6 +22,7 @@
     <Compile Include="src/GameApi.cs" />
     <Compile Include="src/RewardModel.cs" />
     <Compile Include="src/TooltipLocalization.cs" />
+    <Compile Include="src/TooltipLocalization.cs" />
     <Compile Include="src/StudyTooltip.cs" />
   </ItemGroup>
 
