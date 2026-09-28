@@ -6,13 +6,17 @@ namespace StudyRewardInsight
 {
     internal static class Program
     {
+        private const string AtomicGap = "\u2009\u2009";
+
         private static int Main()
         {
             TestMagnitudeBoundaries();
             TestMagnitudeLabels();
             TestGroupingByMagnitude();
             TestSeparateMagnitudes();
-            TestAlchemyLine();
+            TestAtomicVeryHighGroups();
+            TestRussianAlchemyLine();
+            TestEnglishBlock();
 
             Console.WriteLine("RewardModel tests passed.");
             return 0;
@@ -45,22 +49,23 @@ namespace StudyRewardInsight
 
         private static void TestMagnitudeLabels()
         {
-            AssertEqual(
-                "Низкая",
-                RewardModel.MagnitudeLabel(RewardMagnitude.Low),
-                "low label");
-            AssertEqual(
-                "Средняя",
-                RewardModel.MagnitudeLabel(RewardMagnitude.Medium),
-                "medium label");
-            AssertEqual(
-                "Высокая",
-                RewardModel.MagnitudeLabel(RewardMagnitude.High),
-                "high label");
-            AssertEqual(
-                "Очень высокая",
-                RewardModel.MagnitudeLabel(RewardMagnitude.VeryHigh),
-                "very high label");
+            AssertEqual("Низкая", RewardModel.MagnitudeLabel(
+                RewardMagnitude.Low, TooltipLanguage.Russian), "Russian low label");
+            AssertEqual("Средняя", RewardModel.MagnitudeLabel(
+                RewardMagnitude.Medium, TooltipLanguage.Russian), "Russian medium label");
+            AssertEqual("Высокая", RewardModel.MagnitudeLabel(
+                RewardMagnitude.High, TooltipLanguage.Russian), "Russian high label");
+            AssertEqual("Очень высокая", RewardModel.MagnitudeLabel(
+                RewardMagnitude.VeryHigh, TooltipLanguage.Russian), "Russian very high label");
+
+            AssertEqual("Low", RewardModel.MagnitudeLabel(
+                RewardMagnitude.Low, TooltipLanguage.English), "English low label");
+            AssertEqual("Medium", RewardModel.MagnitudeLabel(
+                RewardMagnitude.Medium, TooltipLanguage.English), "English medium label");
+            AssertEqual("High", RewardModel.MagnitudeLabel(
+                RewardMagnitude.High, TooltipLanguage.English), "English high label");
+            AssertEqual("Very High", RewardModel.MagnitudeLabel(
+                RewardMagnitude.VeryHigh, TooltipLanguage.English), "English very high label");
         }
 
         private static void TestGroupingByMagnitude()
@@ -71,17 +76,17 @@ namespace StudyRewardInsight
                 Green = 5
             };
 
-            string actual = RewardModel.BuildRussianBlock(
+            string actual = RewardModel.BuildBlock(
                 snapshot,
-                false);
+                false,
+                TooltipLanguage.Russian);
 
             string expected =
-                "Награда за исследование: (r)(g) Низкая";
+                "Награда за исследование: (r)(g)"
+                + AtomicGap
+                + "Низкая";
 
-            AssertEqual(
-                expected,
-                actual,
-                "same magnitude groups regardless of former efficiency");
+            AssertEqual(expected, actual, "same magnitude groups");
         }
 
         private static void TestSeparateMagnitudes()
@@ -92,36 +97,98 @@ namespace StudyRewardInsight
                 Green = 13
             };
 
-            string actual = RewardModel.BuildRussianBlock(
+            string actual = RewardModel.BuildBlock(
                 snapshot,
-                false);
+                false,
+                TooltipLanguage.Russian);
 
             string expected =
-                "Награда за исследование: (r) Низкая\n"
-                + "(g) Средняя";
+                "Награда за исследование: (r)"
+                + AtomicGap
+                + "Низкая\n"
+                + "(g)"
+                + AtomicGap
+                + "Средняя";
 
-            AssertEqual(
-                expected,
-                actual,
-                "different magnitudes stay separate");
+            AssertEqual(expected, actual, "different magnitudes stay separate");
         }
 
-        private static void TestAlchemyLine()
+        private static void TestAtomicVeryHighGroups()
+        {
+            RewardSnapshot snapshot = new RewardSnapshot
+            {
+                Blue = 66
+            };
+
+            string russian = RewardModel.BuildBlock(
+                snapshot,
+                false,
+                TooltipLanguage.Russian);
+
+            string english = RewardModel.BuildBlock(
+                snapshot,
+                false,
+                TooltipLanguage.English);
+
+            AssertEqual(
+                "Награда за исследование: (b)"
+                + AtomicGap
+                + "Очень"
+                + AtomicGap
+                + "высокая",
+                russian,
+                "Russian icon plus two-word label is atomic");
+
+            AssertEqual(
+                "Study reward: (b)"
+                + AtomicGap
+                + "Very"
+                + AtomicGap
+                + "High",
+                english,
+                "English icon plus two-word label is atomic");
+        }
+
+        private static void TestRussianAlchemyLine()
         {
             RewardSnapshot snapshot = new RewardSnapshot
             {
                 Blue = 45
             };
 
-            string actual = RewardModel.BuildRussianBlock(
+            string actual = RewardModel.BuildBlock(
                 snapshot,
-                true);
+                true,
+                TooltipLanguage.Russian);
 
             string expected =
-                "Награда за исследование: (b) Высокая\n"
-                + "Открывает алхимическое разложение.";
+                "Награда за исследование: (b)"
+                + AtomicGap
+                + "Высокая\n"
+                + "Исследование позволит использовать этот предмет в алхимии.";
 
-            AssertEqual(expected, actual, "alchemy capability line");
+            AssertEqual(expected, actual, "Russian alchemy capability line");
+        }
+
+        private static void TestEnglishBlock()
+        {
+            RewardSnapshot snapshot = new RewardSnapshot
+            {
+                Blue = 45
+            };
+
+            string actual = RewardModel.BuildBlock(
+                snapshot,
+                true,
+                TooltipLanguage.English);
+
+            string expected =
+                "Study reward: (b)"
+                + AtomicGap
+                + "High\n"
+                + "Studying unlocks an alchemy use.";
+
+            AssertEqual(expected, actual, "English block");
         }
 
         private static void AssertMagnitude(

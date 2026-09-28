@@ -6,6 +6,12 @@ using System.Text;
 
 namespace StudyRewardInsight
 {
+    internal enum TooltipLanguage
+    {
+        Russian,
+        English
+    }
+
     internal enum RewardMagnitude
     {
         Low,
@@ -24,28 +30,23 @@ namespace StudyRewardInsight
         {
             switch (pointId)
             {
-                case "r":
-                    return Red;
-                case "g":
-                    return Green;
-                case "b":
-                    return Blue;
-                default:
-                    return 0;
+                case "r": return Red;
+                case "g": return Green;
+                case "b": return Blue;
+                default: return 0;
             }
         }
 
         internal bool HasPositiveReward
         {
-            get
-            {
-                return Red > 0 || Green > 0 || Blue > 0;
-            }
+            get { return Red > 0 || Green > 0 || Blue > 0; }
         }
     }
 
     internal static class RewardModel
     {
+        private const string AtomicGap = "\u2009\u2009";
+
         private sealed class RewardGroup
         {
             internal RewardGroup(RewardMagnitude magnitude)
@@ -54,13 +55,10 @@ namespace StudyRewardInsight
             }
 
             internal RewardMagnitude Magnitude { get; }
-            internal List<string> PointIds { get; } =
-                new List<string>();
+            internal List<string> PointIds { get; } = new List<string>();
         }
 
-        internal static RewardMagnitude Magnitude(
-            string pointId,
-            int points)
+        internal static RewardMagnitude Magnitude(string pointId, int points)
         {
             if (points <= 0)
                 throw new ArgumentOutOfRangeException(nameof(points));
@@ -72,27 +70,25 @@ namespace StudyRewardInsight
                     if (points <= 40) return RewardMagnitude.Medium;
                     if (points <= 75) return RewardMagnitude.High;
                     return RewardMagnitude.VeryHigh;
-
                 case "g":
                     if (points <= 12) return RewardMagnitude.Low;
                     if (points <= 25) return RewardMagnitude.Medium;
                     if (points <= 45) return RewardMagnitude.High;
                     return RewardMagnitude.VeryHigh;
-
                 case "b":
                     if (points <= 12) return RewardMagnitude.Low;
                     if (points <= 37) return RewardMagnitude.Medium;
                     if (points <= 65) return RewardMagnitude.High;
                     return RewardMagnitude.VeryHigh;
-
                 default:
                     throw new ArgumentOutOfRangeException(nameof(pointId));
             }
         }
 
-        internal static string BuildRussianBlock(
+        internal static string BuildBlock(
             RewardSnapshot snapshot,
-            bool hasAlchemyDecomposition)
+            bool hasAlchemyDecomposition,
+            TooltipLanguage language)
         {
             if (snapshot == null || !snapshot.HasPositiveReward)
                 return null;
@@ -106,10 +102,9 @@ namespace StudyRewardInsight
                 if (points <= 0)
                     continue;
 
-                RewardMagnitude magnitude =
-                    Magnitude(pointId, points);
-
+                RewardMagnitude magnitude = Magnitude(pointId, points);
                 RewardGroup group = null;
+
                 foreach (RewardGroup candidate in groups)
                 {
                     if (candidate.Magnitude == magnitude)
@@ -129,7 +124,7 @@ namespace StudyRewardInsight
             }
 
             StringBuilder text = new StringBuilder();
-            text.Append("Награда за исследование:");
+            text.Append(Heading(language));
 
             bool firstGroup = true;
             foreach (RewardGroup group in groups)
@@ -143,36 +138,80 @@ namespace StudyRewardInsight
                     text.Append(")");
                 }
 
-                text.Append(" ");
-                text.Append(MagnitudeLabel(group.Magnitude));
+                text.Append(AtomicGap);
+                text.Append(Atomicize(MagnitudeLabel(group.Magnitude, language)));
                 firstGroup = false;
             }
 
             if (hasAlchemyDecomposition)
             {
                 text.Append("\n");
-                text.Append("Открывает алхимическое разложение.");
+                text.Append(AlchemyLine(language));
             }
 
             return text.ToString();
         }
 
         internal static string MagnitudeLabel(
-            RewardMagnitude magnitude)
+            RewardMagnitude magnitude,
+            TooltipLanguage)
         {
-            switch (magnitude)
+            if (language == TooltipLanguage.Russian)
             {
-                case RewardMagnitude.Low:
-                    return "Низкая";
-                case RewardMagnitude.Medium:
-                    return "Средняя";
-                case RewardMagnitude.High:
-                    return "Высокая";
-                case RewardMagnitude.VeryHigh:
-                    return "Очень высокая";
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(magnitude));
+                switch (magnitude)
+                {
+                    case RewardMagnitude.Low: return "Низкая";
+                    case RewardMagnitude.Medium: return "Средняя";
+                    case RewardMagnitude.High: return "Высокая";
+                    case RewardMagnitude.VeryHigh: return "Очень высокая";
+                    default: throw new ArgumentOutOfRangeException(nameof(magnitude));
+                }
             }
+
+            if (language == TooltipLanguage.English)
+            {
+                switch (magnitude)
+                {
+                    case RewardMagnitude.Low: return "Low";
+                    case RewardMagnitude.Medium: return "Medium";
+                    case RewardMagnitude.High: return "High";
+                    case RewardMagnitude.VeryHigh: return "Very High";
+                    default: throw new ArgumentOutOfRangeException(nameof(magnitude));
+                }
+            }
+
+            throw new ArgumentOutOfRangeException(nameof(language));
+        }
+
+        private static string Heading(TooltipLanguage language)
+        {
+            switch (language)
+            {
+                case TooltipLanguage.Russian:
+                    return "Награда за исследование:";
+                case TooltipLanguage.English:
+                    return "Study reward:";
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(language));
+            }
+        }
+
+        private static string AlchemyLine(TooltipLanguage language)
+        {
+            switch (language)
+            {
+                case TooltipLanguage.Russian:
+                    return "Исследование позволит использовать этот предмет в алхимии.";
+                case TooltipLanguage.English:
+                    return "Studying unlocks an alchemy use.";
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(language));
+            }
+        }
+
+        private static string Atomicize(string text)
+        {
+            return text.Replace(" ", AtomicGap);
         }
     }
 }

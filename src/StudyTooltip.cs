@@ -21,11 +21,13 @@ namespace StudyRewardInsight
             bool fullDetail,
             object result)
         {
+            TooltipLanguage language;
+
             if (!fullDetail
                 || itemDefinition == null
                 || item == null
                 || result == null
-                || !IsRussianLanguage())
+                || !TryGetLanguage(out language))
             {
                 return;
             }
@@ -69,9 +71,10 @@ namespace StudyRewardInsight
             bool hasAlchemy =
                 GameApi.GetAlchemyDecompositionCount(itemDefinition) > 0;
 
-            string block = RewardModel.BuildRussianBlock(
+            string block = RewardModel.BuildBlock(
                 snapshot,
-                hasAlchemy);
+                hasAlchemy,
+                language);
 
             if (string.IsNullOrEmpty(block))
                 return;
@@ -280,18 +283,35 @@ namespace StudyRewardInsight
             }
         }
 
-        private static bool IsRussianLanguage()
+        private static bool TryGetLanguage(
+            out TooltipLanguage language)
         {
-            string language = (
+            string current = (
                 GameApi.CurrentLanguage()
                 ?? string.Empty)
                 .Trim()
                 .ToLowerInvariant();
 
-            return language == "ru"
-                || language == "russian"
-                || language.StartsWith("ru-", StringComparison.Ordinal)
-                || language.StartsWith("ru_", StringComparison.Ordinal);
+            if (current == "ru"
+                || current == "russian"
+                || current.StartsWith("ru-", StringComparison.Ordinal)
+                || current.StartsWith("ru_", StringComparison.Ordinal))
+            {
+                language = TooltipLanguage.Russian;
+                return true;
+            }
+
+            if (current == "en"
+                || current == "english"
+                || current.StartsWith("en-", StringComparison.Ordinal)
+                || current.StartsWith("en_", StringComparison.Ordinal))
+            {
+                language = TooltipLanguage.English;
+                return true;
+            }
+
+            language = TooltipLanguage.Russian;
+            return false;
         }
 
         private static string NormalizeExpression(string expression)

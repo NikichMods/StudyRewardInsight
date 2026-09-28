@@ -13,7 +13,7 @@ namespace StudyRewardInsight
     {
         public const string PluginGuid = "nikich.graveyardkeeper.studyrewardinsight";
         public const string PluginName = "Study Reward Insight";
-        public const string PluginVersion = "0.1.1";
+        public const string PluginVersion = "0.1.2";
 
         internal static ManualLogSource Log;
 
