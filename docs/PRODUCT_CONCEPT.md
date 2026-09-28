@@ -37,15 +37,15 @@ It should describe **properties of the Study result**, not decide whether the pl
 
 For every positive R/G/B Study reward, show a qualitative magnitude associated with that color.
 
-Leading model: four tiers with color-specific numerical thresholds.
+Accepted four-tier player-facing vocabulary:
+- **Скромная**;
+- **Приличная**;
+- **Щедрая**;
+- **Подозрительно щедрая**.
 
-Current working vocabulary:
-- Low;
-- Moderate;
-- High;
-- Very high.
+The numerical thresholds remain color-specific. Every ordinary Study receives one of these qualitative magnitude labels for each rewarded color; there is no unlabeled "ordinary reward" class.
 
-Atmospheric wording remains open; the semantics are more important than the labels.
+When multiple colors have the same complete displayed assessment, collapse them into one row with multiple native point icons. Split into separate rows only when their displayed assessments differ.
 
 Why always:
 - this is the most direct missing information in vanilla;
@@ -54,37 +54,39 @@ Why always:
 - it works for zero-Faith Study;
 - it preserves multi-color tradeoffs instead of inventing a combined score.
 
-### 2. Faith return — exception-oriented
+### 2. Unusual Faith efficiency — compact exception modifier
 
-Faith efficiency is a separate property from absolute reward magnitude.
+Faith efficiency is a separate property from absolute reward magnitude, but the tooltip should **not mention Faith explicitly** and should not introduce a technical efficiency label.
 
 Do **not** combine colors into one efficiency score.
 
-Leading behavior:
-- omit the efficiency qualifier when a rewarded color is close to the host's ordinary ~10-points-per-Faith norm;
-- show a qualifier only for materially unusual low/high returns;
-- associate the qualifier with the specific technology-point color.
+Accepted presentation direction:
+- when a rewarded color is close to the host's ordinary ~10-points-per-Faith norm, show **no modifier**;
+- when materially above the ordinary return, append **"щедрее обычного"**;
+- when materially below the ordinary return, append **"скупее обычного"**;
+- associate the modifier with the specific technology-point color;
+- if multiple colors have the same magnitude tier and the same modifier, collapse their icons into one row.
 
-Working normalized bands for research:
-- low return: < 0.75× host norm;
-- normal: 0.75×–1.25×;
-- high: > 1.25× and < 2×;
-- exceptional: >= 2×.
+Working normalized research boundaries remain:
+- unusually low: < 0.75× host norm;
+- ordinary: 0.75×–1.25×;
+- unusually high: > 1.25× host norm.
 
 At these working boundaries:
-- 30 of 178 paid ordinary Study definitions have at least one unusual color return;
-- only ~17% of paid Studies therefore receive any efficiency exception marker.
+- 30 / 223 ordinary Study definitions (13.5%) have at least one unusual return;
+- therefore 193 / 223 (86.5%) show no efficiency modifier at all;
+- among paid Study only, 30 / 178 (16.9%) have an exception marker.
 
-This keeps the signal scarce enough to remain meaningful.
+The modifier is intentionally a light "wink", not a formula. The player sees the actual Faith cost at the Study Table and can connect it to the qualitative hint without the item tooltip explaining the denominator.
 
-Zero-Faith Study should not be labeled "infinitely efficient". The native zero cost already carries the important information unless UX testing proves an explicit cue is needed.
+Zero-Faith Study receives no efficiency modifier.
 
 ### 3. Alchemical decomposition unlock — when applicable
 
 Accepted runtime evidence establishes that 62 / 223 ordinary Study definitions unlock at least one native alchemical decomposition path.
 
-For those unstudied items, show a short capability cue:
-- Study will unlock alchemical decomposition.
+For those unstudied items, show the accepted short capability cue:
+- **После изучения сгодится для алхимии.**
 
 Do **not** reveal before Study:
 - the exact alchemical element;
@@ -195,25 +197,31 @@ Relevant principle:
 - expose information at the moment it supports a concrete decision;
 - do not broaden the feature into general game-solving.
 
-## Leading product shape
+## Accepted product shape
 
-For an ordinary single-color Study:
-- preserve native Study information;
-- add qualitative reward magnitude.
+Before an incomplete Study, the predictive block is conceptually:
 
-For an unusually efficient/inefficient paid Study:
-- add a compact Faith-return qualifier associated with that color.
+`Награда за исследование:`
+`[point icon(s)] [magnitude] [optional exception modifier]`
+`[second reward row only if another color group differs]`
+`После изучения сгодится для алхимии.` — only when applicable.
 
-For a Study-gated alchemy item:
-- add one short "unlocks alchemical decomposition" signal.
-
-For multi-color Study:
-- preserve color association for both magnitude and any efficiency exception;
-- do not collapse the colors into one score.
+Rules:
+- every ordinary Study gets a magnitude assessment;
+- the exception modifier is absent for ordinary efficiency;
+- equal complete assessments across colors are collapsed into one row;
+- different assessments remain separate rows;
+- the alchemy cue is a separate capability line;
+- exact point quantities, exact alchemy results, and explicit Faith-efficiency formulas remain hidden.
 
 After completed Study:
 - remove all predictive cues;
-- preserve vanilla completed state.
+- preserve vanilla completed behavior.
+
+The current vanilla dataset yields:
+- 217 / 223 Study definitions (97.3%) require only one reward row after color collapsing;
+- 6 / 223 (2.7%) require two reward rows;
+- 62 / 223 (27.8%) receive the additional alchemy line.
 
 ## Questions the mod should answer
 
@@ -241,12 +249,13 @@ After completed Study:
 
 ## Remaining open product questions
 
-1. final four magnitude labels, including whether a more Graveyard-Keeper-like vocabulary is preferable to Low/Moderate/High/Very high;
-2. final Faith-return vocabulary and exact exception thresholds;
-3. compact representation for multi-color Study without making the tooltip tall/noisy;
-4. whether low-return exceptions should be shown as prominently as high/exceptional returns;
-5. exact wording/iconography for the alchemy-unlock cue;
-6. localization behavior and layout across supported languages.
+The core information architecture and Russian wording direction are accepted.
+
+Still open:
+1. final numerical cutoffs for the exception modifier (the current <0.75× / >1.25× model remains a research candidate);
+2. punctuation and exact typography between magnitude and the optional `щедрее обычного / скупее обычного` modifier;
+3. localization wording and layout across supported languages;
+4. visual acceptance of the one-row/two-row reward block in the real item tooltip.
 
 ## Remaining engineering questions
 
