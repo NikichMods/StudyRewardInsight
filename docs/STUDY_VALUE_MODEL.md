@@ -210,18 +210,42 @@ Faith-normalized dimension:
 
 Final localization wording requires UI/layout testing and all supported game languages.
 
-## Open evidence
+## 0.2.0 evidence closure
 
-Production remains **BLOCKED**.
+StudyValueDump 0.2.0 completed successfully on Graveyard Keeper 1.407. See `docs/STUDY_VALUE_RUNTIME_0.2.0.md`.
 
-Probe 0.2.0 must close:
-1. full alchemy-decomposable Study population and native decomposition classes;
-2. exact Science cost from `needs_from_wgo`;
-3. Story output chance/min/max expressions;
-4. any non-empty special Survey completion fields relevant to generic product semantics.
+Closed facts:
+- 62 / 223 ordinary Study definitions unlock at least one native alchemical decomposition path;
+- Science cost is explicit and differs from Faith on 55 / 223 rows, so Science must not be silently folded into Faith efficiency;
+- 173 rows contain Story output gated by `p_naturalist`, using either independent self-chance or weighted chance groups;
+- only two rows have deterministic non-Story/non-tech progression outputs: Keeper's Key and Obsidian;
+- generic `end_event`, `end_script`, `craft_after_finish`, and `ach_key` fields are empty across the ordinary Study set.
 
-After that, decide:
-- whether Story merits a pre-Study signal at all;
-- whether efficiency should be displayed always or exceptions-only;
+Story is therefore real Study value, but conditional and not a good default tooltip axis. The core model remains magnitude + Faith return + decomposition capability.
+
+## Quest relevance as a separate signal
+
+A further player-value axis is now in research: whether an unstudied item's decomposition route can help satisfy an **already-visible current task** through recipes the player already knows.
+
+This is deliberately not part of the Study reward score. It is a current-save relevance signal.
+
+Leading no-spoiler rule:
+- current Visible task only;
+- task requirement recovered from authored current-task data;
+- traverse only recipes the current save already exposes;
+- allow the final hidden edge to be the uncompleted Study-gated decomposition;
+- display only a generic hint, not the quest, recipe, ingredient, or decomposition result.
+
+See `docs/QUEST_RELEVANCE_RESEARCH.md`.
+
+## Remaining product decisions
+
+Production remains **BLOCKED** pending presentation decisions and the quest-relevance owner proof.
+
+Still open:
+- whether Faith return should be displayed always or only for meaningful deviations from the host norm;
 - exact wording and compact multi-color presentation;
-- whether any Study Table-specific augmentation is still justified.
+- whether the alchemy capability cue should be text, icon+text, or folded into a compact secondary line;
+- whether Story should remain intentionally omitted;
+- whether a Study Table-specific augmentation is necessary after tooltip layout testing;
+- exact current-task requirement owner/data path for the no-spoiler quest-relevance signal.
