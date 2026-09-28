@@ -4,7 +4,7 @@ Target: **Graveyard Keeper 1.407**
 
 Branch: `feature/study-tooltip-preview`
 
-Status: **core Russian tooltip implementation READY; non-Russian localization and real-runtime visual acceptance remain separate BLOCKED release work**
+Status: **compact neutral Russian tooltip iteration READY for implementation; non-Russian localization and final real-runtime visual acceptance remain separate BLOCKED release work**
 
 This record closes the implementation evidence gates required before the first production-source mutation for the accepted Study Reward Insight tooltip model.
 
@@ -229,3 +229,56 @@ Required later acceptance:
 - verify wrapping, spacing, icon grouping, and that completed Study remains vanilla when an accessible completed item is available.
 
 Do not build a new runtime probe merely for this visual property. Human observation of the real production candidate is the stronger evidence.
+
+
+## Gate F — compact neutral runtime-UX iteration
+
+**READY**
+
+This gate was recorded after review of the first real-runtime candidate and before the follow-up production-source mutation.
+
+**Observable property**
+
+For Russian incomplete Study tooltips:
+- use **Низкая / Средняя / Высокая / Очень высокая** for the existing color-specific magnitude bands;
+- keep the first reward group on the same line as `Награда за исследование:` instead of forcing a newline;
+- keep later reward groups on separate lines only when their magnitudes differ;
+- remove `щедрее обычного / скупее обычного` entirely from player-facing output;
+- stop reading/calculating Faith efficiency in production when it no longer affects visible behavior;
+- use the neutral alchemy capability wording `Открывает алхимическое разложение.`.
+
+**Canonical owner / data path**
+
+No host owner changes:
+- magnitude still derives from current Survey `CraftDefinition.output`;
+- the same accepted color-specific thresholds apply;
+- alchemy capability still derives from native `ItemDefinition.GetItemDetails().alchemy.decomposes`;
+- the same existing `BubbleWidgetTextData.text` field remains the sole mutation point.
+
+The removed relative modifier formerly read `CraftDefinition.needs` only to derive an additional display property. Because that display property is no longer part of the product, the Faith-read path should be deleted rather than retained as hidden computation.
+
+**Final writer / consumer / commit point**
+
+Unchanged: SRI replaces only the text of the uniquely identified native incomplete-Survey row returned from `ItemDefinition.GetTooltipData(Item,bool)`; the native tooltip then renders and sizes that row.
+
+**Blast radius**
+
+Formatting/model simplification only on the already-gated Russian full-detail incomplete-Study path. No new hook, widget, cache, lifecycle assumption, or host mutation is introduced. Removing the Faith-derived modifier reduces the production data surface.
+
+**Preserved invariants**
+
+- exact R/G/B quantities remain hidden;
+- reward thresholds and underlying Survey rewards remain unchanged;
+- no Faith/Science cost, reward, recipe, technology, progression, save, or RNG mutation;
+- completed Study remains native;
+- unsupported dynamic R/G/B output still fails safe to vanilla;
+- Story and quest relevance remain out of scope;
+- non-Russian tooltips remain vanilla.
+
+**Acceptance evidence**
+
+- real-runtime screenshots from candidate 0.1.0 showed that forced heading/reward line separation and long relative-modifier text made short rows visually unstable in the centered native tooltip;
+- the accepted follow-up product decision removes the relative modifier and adopts neutral low/medium/high labels;
+- build-time tests can prove exact strings, threshold preservation, magnitude-only grouping, and one-line-first-group formatting;
+- no new host/runtime research is required because the owner, writer, renderer, and data paths are unchanged or reduced;
+- final acceptance remains a direct human runtime visual check of the new candidate.
