@@ -1,0 +1,224 @@
+craft,mapped_items,mapped_names,faith,red,green,blue,red_per_faith,green_per_faith,blue_per_faith
+surv:crop_waste,crop_waste,Компост,1,0,10,0,,10.0000,
+surv:wheat_seed,wheat_seed,Семена пшеницы,1,0,10,0,,10.0000,
+surv:wheat_crop,wheat_crop,Пшеница,1,0,10,0,,10.0000,
+surv:cabbage_seed,cabbage_seed,Семена капусты,1,0,10,0,,10.0000,
+surv:cabbage_crop,cabbage_crop,Капуста,1,0,10,0,,10.0000,
+surv:hiccup_grass,hiccup_grass,Ик-трава,1,0,10,0,,10.0000,
+surv:carrot_seed,carrot_seed,Семена моркови,1,0,10,0,,10.0000,
+surv:carrot_crop,carrot_crop,Морковь,1,0,10,0,,10.0000,
+surv:onion_seed,onion_seed:1;onion_seed:2;onion_seed:3,Семена лука;Семена лука;Семена лука,2,0,20,0,,10.0000,
+surv:onion_crop,onion_crop:1;onion_crop:2;onion_crop:3,Лук;Лук;Лук,2,0,20,0,,10.0000,
+surv:beet_seed,beet_seed,Семена свёклы,2,0,20,0,,10.0000,
+surv:beet_crop,beet_crop,Свёкла,2,0,20,0,,10.0000,
+surv:lentils_seed,lentils_seed:1;lentils_seed:2;lentils_seed:3,Семена чечевицы;Семена чечевицы;Семена чечевицы,3,0,30,0,,10.0000,
+surv:lentils_crop,lentils_crop:1;lentils_crop:2;lentils_crop:3,Чечевица;Чечевица;Чечевица,3,0,30,0,,10.0000,
+surv:pumpkin_seed,pumpkin_seed:1;pumpkin_seed:2;pumpkin_seed:3,Семена тыквы;Семена тыквы;Семена тыквы,3,0,30,0,,10.0000,
+surv:pumpkin_crop,pumpkin_crop:1;pumpkin_crop:2;pumpkin_crop:3,Тыква;Тыква;Тыква,3,0,30,0,,10.0000,
+surv:hamp_seed,hamp_seed:1;hamp_seed:2;hamp_seed:3,Семена конопли;Семена конопли;Семена конопли,4,0,40,0,,10.0000,
+surv:hamp_crop,hamp_crop:1;hamp_crop:2;hamp_crop:3,Конопля;Конопля;Конопля,4,0,40,0,,10.0000,
+surv:hop_seed,hop_seed:1;hop_seed:2;hop_seed:3,Семена хмеля;Семена хмеля;Семена хмеля,4,0,40,0,,10.0000,
+surv:hop_crop,hop_crop:1;hop_crop:2;hop_crop:3,Хмель;Хмель;Хмель,4,0,40,0,,10.0000,
+surv:grapes_seed,grapes_seed:1;grapes_seed:2;grapes_seed:3,Семена винограда;Семена винограда;Семена винограда,5,0,50,0,,10.0000,
+surv:fruit:grapes_crop,fruit:grapes_crop:1;fruit:grapes_crop:2;fruit:grapes_crop:3,Виноград;Виноград;Виноград,5,0,50,0,,10.0000,
+surv:sack_clock_gold,sack_clock_gold,Удобрение ускоряющее рост II,5,0,50,0,,10.0000,
+surv:sack_clock_silver,sack_clock_silver,Удобрение ускоряющее рост I,3,0,30,0,,10.0000,
+surv:sack_star_gold,sack_star_gold,Удобрение качества II,5,0,50,0,,10.0000,
+surv:sack_star_silver,sack_star_silver,Удобрение качества I,3,0,30,0,,10.0000,
+surv:peat,peat,Торф,1,0,10,0,,10.0000,
+surv:rope_hemp,rope_hemp,Конопляная веревка,1,0,10,0,,10.0000,
+surv:skin_pig,skin_pig,Свиная кожа,1,0,10,0,,10.0000,
+surv:fish_frog_green,fish_frog_green,Лягушка,2,0,20,0,,10.0000,
+surv:fish_gudgeon,fish_gudgeon,Пескарь,2,0,20,0,,10.0000,
+surv:fish_anchovy,fish_anchovy,Килька,2,0,20,0,,10.0000,
+surv:fish_bream,fish_bream:1;fish_bream:2,Лещ;Лещ,2,0,20,0,,10.0000,
+surv:fish_carp,fish_carp,Карп,2,0,20,0,,10.0000,
+surv:fish_perch,fish_perch,Окунь,2,0,20,0,,10.0000,
+surv:fish_eel,fish_eel,Угорь,3,0,30,0,,10.0000,
+surv:fish_tilapia,fish_tilapia,Тиляпия,3,0,30,0,,10.0000,
+surv:fish_tuna,fish_tuna:1;fish_tuna:2,Тунец;Тунец,3,0,30,0,,10.0000,
+surv:fish_sardine,fish_sardine:1;fish_sardine:2,Сардина;Сардина,3,0,30,0,,10.0000,
+surv:fish_pike,fish_pike:1;fish_pike:2,Щука;Щука,3,0,30,0,,10.0000,
+surv:fish_sturgeon,fish_sturgeon:2;fish_sturgeon:3,Осетр;Осетр,3,0,30,0,,10.0000,
+surv:fish_salmon,fish_salmon:2;fish_salmon:3,Лосось;Лосось,5,0,50,0,,10.0000,
+surv:fish_crucian_silver,fish_crucian_silver:1;fish_crucian_silver:2,Серебряный карась;Серебряный карась,5,0,50,0,,10.0000,
+surv:fish_crucian_gold,fish_crucian_gold,Золотой карась,5,0,50,0,,10.0000,
+surv:fish_goldfish,fish_goldfish,Золотая рыбка,5,0,50,0,,10.0000,
+surv:fruit:berry,fruit:berry,Ягоды,1,0,10,0,,10.0000,
+surv:fruit:apple_red_crop,fruit:apple_red_crop,Красное яблоко,1,0,10,0,,10.0000,
+surv:nori,nori,Лист нори,1,0,10,0,,10.0000,
+surv:butterfly,butterfly,Бабочка,1,0,10,0,,10.0000,
+surv:moth,moth,Мотылёк,1,0,10,0,,10.0000,
+surv:honey,honey,Мёд,2,0,20,0,,10.0000,
+surv:beeswax,beeswax,Пчелиный воск,2,0,20,0,,10.0000,
+surv:flw_chamomile,flw_chamomile,Белый цветок,1,0,10,0,,10.0000,
+surv:flw_dandelion,flw_dandelion,Желтый цветок,1,0,10,0,,10.0000,
+surv:flw_poppy,flw_poppy,Красный цветок,1,0,10,0,,10.0000,
+surv:shr_boletus,shr_boletus,Съедобный гриб,1,0,10,0,,10.0000,
+surv:bee,bee,Пчела,3,0,30,0,,10.0000,
+surv:shr_agaric,shr_agaric,Красный гриб,3,0,30,0,,10.0000,
+surv:bat_wing,bat_wing,Крыло летучей мыши,1,0,10,0,,10.0000,
+surv:jelly_slug,jelly_slug,Зелёное желе,1,0,10,0,,10.0000,
+surv:jelly_slug_blue,jelly_slug_blue,Синее желе,1,10,0,0,10.0000,,
+surv:jelly_slug_orange,jelly_slug_orange,Оранжевое желе,1,10,0,0,10.0000,,
+surv:jelly_slug_black,jelly_slug_black,Чёрное желе,1,10,0,0,10.0000,,
+surv:spider_web,spider_web,Паутина,1,0,10,0,,10.0000,
+surv:slime,slime,Слизь,1,0,10,0,,10.0000,
+surv:alchemy_1_yellow_electro,alchemy_1_yellow_electro,Электрический порошок,1,5,0,5,5.0000,,5.0000
+surv:ash,ash,Пепел,1,0,10,0,,10.0000,
+surv:sand_river,sand_river,Речной песок,1,0,10,0,,10.0000,
+surv:1h_ore_metal,1h_ore_metal,Железная руда,1,0,10,0,,10.0000,
+surv:ingot_metal,ingot_metal,Железный слиток,1,10,10,0,10.0000,10.0000,
+surv:nails,nails,Гвозди,1,10,0,0,10.0000,,
+surv:detail_1,detail_1,Простые железные детали,1,10,0,0,10.0000,,
+surv:glass_0,glass_0,Стекло,1,10,0,0,10.0000,,
+surv:hammer_0,hammer_0,Ржавый молоток,1,10,0,0,10.0000,,
+surv:axe_0,axe_0,Ржавый топор,1,10,0,0,10.0000,,
+surv:pickaxe_0,pickaxe_0,Ржавая кирка,1,10,0,0,10.0000,,
+surv:shovel_0,shovel_0,Ржавая лопата,1,10,0,0,10.0000,,
+surv:sword_0,sword_0,Ржавый меч,1,10,0,0,10.0000,,
+surv:nugget_silver,nugget_silver,Серебряный самородок,2,0,20,0,,10.0000,
+surv:nugget_gold,nugget_gold,Золотой самородок,2,0,20,0,,10.0000,
+surv:lifestone,lifestone,Известняк,2,0,20,0,,10.0000,
+surv:maggot,maggot,Личинка,2,0,20,0,,10.0000,
+surv:detail_2,detail_2,Сложные железные детали,2,20,0,0,10.0000,,
+surv:graphite,graphite,Графит,2,0,20,0,,10.0000,
+surv:glass_1,glass_1,Колбы,2,20,0,0,10.0000,,
+surv:ingot_steel,ingot_steel,Слиток стали,3,30,0,0,10.0000,,
+surv:axe_1,axe_1,Топор I,3,30,0,0,10.0000,,
+surv:pickaxe_1,pickaxe_1,Кирка I,3,30,0,0,10.0000,,
+surv:shovel_1,shovel_1,Лопата I,3,30,0,0,10.0000,,
+surv:chisel:chisel_1,chisel:chisel_1,Железная стамеска,3,30,0,0,10.0000,,
+surv:sword_1,sword_1,Меч,3,30,0,0,10.0000,,
+surv:armor_lamellar_1,armor_lamellar_1,Железная броня,3,30,0,0,10.0000,,
+surv:ingot_silver,ingot_silver,Слиток серебра,5,50,0,0,10.0000,,
+surv:ingot_gold,ingot_gold,Слиток золота,5,50,0,0,10.0000,,
+surv:detail_3,detail_3,Стальные части,5,50,0,0,10.0000,,
+surv:glass_2,glass_2,Сложные колбы,5,50,0,0,10.0000,,
+surv:chisel:chisel_2,chisel:chisel_2:1;chisel:chisel_2:2;chisel:chisel_2:3,Стальная стамеска;Стальная стамеска;Стальная стамеска,5,50,0,0,10.0000,,
+surv:hammer_2,hammer_2,Железный молоток,10,100,0,0,10.0000,,
+surv:jewelry_detail_gold,jewelry_detail_gold,Золотые ювелирные детали,10,100,0,0,10.0000,,
+surv:jewelry_detail_silver,jewelry_detail_silver,Серебряные ювелирные детали,10,100,0,0,10.0000,,
+surv:faceted_emerald,faceted_emerald,Граненый изумруд,10,100,0,0,10.0000,,
+surv:axe_2,axe_2,Топор II,10,100,0,0,10.0000,,
+surv:pickaxe_2,pickaxe_2,Кирка II,10,100,0,0,10.0000,,
+surv:shovel_2,shovel_2,Лопата II,10,100,0,0,10.0000,,
+surv:sword_damask_gem,sword_damask_gem,Меч из дамасской стали с самоцветом,10,150,0,0,15.0000,,
+surv:sword_steel_gem,sword_steel_gem,Стальной меч с самоцветом,10,100,0,0,10.0000,,
+surv:armor_lamellar_2,armor_lamellar_2,Стальная броня,10,150,0,0,15.0000,,
+surv:wood1,wood1,Чурбан,1,0,10,0,,10.0000,
+surv:flitch,flitch,Доска,1,10,0,0,10.0000,,
+surv:clay,clay,Глина,1,0,10,0,,10.0000,
+surv:polishing_paste,polishing_paste,Полировочная паста,1,10,0,0,10.0000,,
+surv:ceramic_1,ceramic_1,Керамическая миска,1,10,0,0,10.0000,,
+surv:firewood,firewood,Дрова,2,20,0,0,10.0000,,
+surv:coal,coal,Уголь,2,0,20,0,,10.0000,
+surv:spike_1,spike_1,Деревянные клинья,2,20,0,0,10.0000,,
+surv:stone_plate_1,stone_plate_1,Кусок камня,2,20,0,0,10.0000,,
+surv:ceramic_2,ceramic_2,Керамический кувшин,2,20,0,0,10.0000,,
+surv:marble_plate_1,marble_plate_1,Кусок мрамора,3,30,0,0,10.0000,,
+surv:sulfur,sulfur,Сера,3,0,30,0,,10.0000,
+surv:wooden_plank,wooden_plank,Брус,3,30,0,0,10.0000,,
+surv:stone_plate_2,stone_plate_2,Полированный камень,3,30,0,0,10.0000,,
+surv:wood_balk_1,wood_balk_1,Деревянная балка,5,50,0,0,10.0000,,
+surv:marble_plate_2,marble_plate_2,Полированный мрамор,5,50,0,0,10.0000,,
+surv:ceramic_3,ceramic_3,Фарфоровый кувшин,5,50,0,0,10.0000,,
+surv:stone_plate_3,stone_plate_3,Резной камень,5,50,0,0,10.0000,,
+surv:pyrite,pyrite,Пирит,7,0,70,0,,10.0000,
+surv:wood_constr_1,wood_constr_1,Деревянная конструкция,7,100,0,0,14.2857,,
+surv:carved_wood,carved_wood:1;carved_wood:2;carved_wood:3,Резное дерево;Резное дерево;Резное дерево,10,150,0,0,15.0000,,
+surv:marble_plate_3,marble_plate_3:1;marble_plate_3:2;marble_plate_3:3,Резной мрамор;Резной мрамор;Резной мрамор,10,150,0,0,15.0000,,
+surv:dessert:jelly_green,dessert:jelly_green,Зеленое желе,1,0,10,0,,10.0000,
+surv:pen:ink_pen,pen:ink_pen,Перо и чернила,2,10,10,0,5.0000,5.0000,
+surv:skroll_skin_pig,skroll_skin_pig,Бумага из свиной кожи,2,10,10,0,5.0000,5.0000,
+surv:cover:cover_1,cover:cover_1,Мягкая обложка,3,50,0,0,16.6667,,
+surv:cover:cover_hard,cover:cover_hard:1;cover:cover_hard:2;cover:cover_hard:3,Твердая обложка;Твердая обложка;Твердая обложка,5,100,0,0,20.0000,,
+surv:goo,goo,Слизь,0,0,5,0,,,
+surv:alchemy_1_brown,alchemy_1_brown,Порошок замедления,0,0,5,0,,,
+surv:alchemy_1_d_blue,alchemy_1_d_blue,Порошок ускорения,0,0,5,0,,,
+surv:alchemy_1_d_green,alchemy_1_d_green,Порошок здоровья,0,0,5,0,,,
+surv:alchemy_1_d_violet,alchemy_1_d_violet,Порошок смерти,0,0,0,5,,,
+surv:alchemy_1_green,alchemy_1_green,Порошок порядка,0,0,5,0,,,
+surv:alchemy_1_red,alchemy_1_red,Токсичный порошок,0,0,5,0,,,
+surv:alchemy_1_violet,alchemy_1_violet,Порошок хаоса,0,0,0,5,,,
+surv:alchemy_1_yellow,alchemy_1_yellow,Порошок жизни,0,0,0,5,,,
+surv:alchemy_2_brown,alchemy_2_brown,Раствор замедления,0,0,5,0,,,
+surv:alchemy_2_d_blue,alchemy_2_d_blue,Раствор ускорения,0,0,5,0,,,
+surv:alchemy_2_d_green,alchemy_2_d_green,Раствор здоровья,0,0,5,0,,,
+surv:alchemy_2_d_violet,alchemy_2_d_violet,Раствор смерти,0,0,0,5,,,
+surv:alchemy_2_green,alchemy_2_green,Раствор порядка,0,0,5,0,,,
+surv:alchemy_2_red,alchemy_2_red,Раствор токсичности,0,0,5,0,,,
+surv:alchemy_2_violet,alchemy_2_violet,Раствор хаоса,0,0,0,5,,,
+surv:alchemy_2_yellow,alchemy_2_yellow,Раствор жизни,0,0,0,5,,,
+surv:alchemy_3_brown,alchemy_3_brown,Экстракт замедления,0,0,5,0,,,
+surv:alchemy_3_d_blue,alchemy_3_d_blue,Экстракт ускорения,0,0,5,0,,,
+surv:alchemy_3_d_green,alchemy_3_d_green,Экстракт здоровья,0,0,5,0,,,
+surv:alchemy_3_d_violet,alchemy_3_d_violet,Экстракт смерти,0,0,0,5,,,
+surv:alchemy_3_green,alchemy_3_green,Экстракт порядка,0,0,5,0,,,
+surv:alchemy_3_red,alchemy_3_red,Экстракт токсичности,0,0,5,0,,,
+surv:alchemy_3_violet,alchemy_3_violet,Экстракт хаоса,0,0,0,5,,,
+surv:alchemy_3_yellow,alchemy_3_yellow,Экстракт жизни,0,0,0,5,,,
+surv:goo_brown,goo_brown,Замедляющая слизь,0,0,1,0,,,
+surv:goo_d_blue,goo_d_blue,Слизь ускорения,0,0,1,0,,,
+surv:goo_d_green,goo_d_green,Слизь здоровья,0,0,1,0,,,
+surv:goo_d_violet,goo_d_violet,Слизь смерти,0,0,0,1,,,
+surv:goo_green,goo_green,Слизь порядка,0,0,1,0,,,
+surv:goo_red,goo_red,Ядовитая слизь,0,0,1,0,,,
+surv:goo_violet,goo_violet,Слизь хаоса,0,0,0,1,,,
+surv:goo_yellow,goo_yellow,Слизь жизни,0,0,0,1,,,
+surv:goo_alcohol,goo_alcohol,Алкогольная слизь,0,0,0,1,,,
+surv:goo_ash,goo_ash,Пепельная слизь,0,1,0,0,,,
+surv:goo_blood,goo_blood,Кровавая слизь,0,1,0,0,,,
+surv:goo_gold,goo_gold,Золотая слизь,0,0,0,1,,,
+surv:goo_graphite,goo_graphite,Графитовая слизь,0,0,1,0,,,
+surv:goo_oil,goo_oil,Масляная слизь,0,0,1,0,,,
+surv:goo_salt,goo_salt,Соленая слизь,0,1,0,0,,,
+surv:goo_silver,goo_silver,Серебряная слизь,0,0,0,1,,,
+surv:goo_spice,goo_spice,Пряная слизь,0,1,1,1,,,
+surv:goo_water,goo_water,Водяная слизь,0,0,1,0,,,
+surv:goo_white,goo_white,Белая слизь,0,0,1,0,,,
+surv:goo_yellow_electro,goo_yellow_electro,Электрическая слизь,0,1,0,0,,,
+surv:grave_top_wd_tab_1,grave_top_wd_tab_1,Деревянная табличка,1,0,0,10,,,10.0000
+surv:grave_top_wd_cross_1,grave_top_wd_cross_1,Деревянный крест,2,0,0,20,,,10.0000
+surv:grave_bot_wd_1,grave_bot_wd_1,Деревянная ограда,2,0,0,20,,,10.0000
+surv:grave_top_stn_plate_1,grave_top_stn_plate_1,Могильный камень,2,0,0,20,,,10.0000
+surv:grave_bot_stn_1,grave_bot_stn_1,Каменная ограда,3,0,0,30,,,10.0000
+surv:grave_top_stn_cross_1,grave_top_stn_cross_1,Каменный крест,3,0,0,30,,,10.0000
+surv:grave_top_stn_plate_2,grave_top_stn_plate_2,Могильный камень II,3,0,0,30,,,10.0000
+surv:grave_bot_stn_2,grave_bot_stn_2,Каменная ограда II,3,0,0,30,,,10.0000
+surv:grave_top_stn_cross_2,grave_top_stn_cross_2,Каменный крест II,3,0,0,30,,,10.0000
+surv:grave_top_stella_stn_1,grave_top_stella_stn_1,Каменная стела,5,0,0,30,,,6.0000
+surv:grave_top_sculpt_stn_1,grave_top_sculpt_stn_1,Каменная скульптура,5,0,0,50,,,10.0000
+surv:grave_top_sculpt_stn_2,grave_top_sculpt_stn_2,Каменная скульптура II,5,0,0,50,,,10.0000
+surv:grave_bot_mrb_1,grave_bot_mrb_1,Мраморная ограда,7,0,0,80,,,11.4286
+surv:grave_top_mrb_cross_1,grave_top_mrb_cross_1,Мраморный крест,7,0,0,80,,,11.4286
+surv:grave_bot_mrb_2,grave_bot_mrb_2,Мраморная ограда II,8,0,0,90,,,11.2500
+surv:grave_top_mrb_cross_2,grave_top_mrb_cross_2,Мраморный крест II,8,0,0,90,,,11.2500
+surv:grave_top_stella_mrb_1,grave_top_stella_mrb_1,Мраморная стела,8,0,0,90,,,11.2500
+surv:grave_top_sarcofag_mrb_1,grave_top_sarcofag_mrb_1,Мраморный саркофаг,10,0,0,100,,,10.0000
+surv:grave_top_sculpt_mrb_1,grave_top_sculpt_mrb_1,Мраморная скульптура,10,0,0,100,,,10.0000
+surv:grave_top_sculpt_mrb_2,grave_top_sculpt_mrb_2,Мраморная скульптура II,10,0,0,100,,,10.0000
+surv:grave_bot_stn_8,grave_bot_stn_8,Каменная ограда VIII,10,0,0,100,,,10.0000
+surv:grave_bot_mrb_8,grave_bot_mrb_8,Мраморная ограда VIII,10,0,0,120,,,12.0000
+surv:grave_top_sculpt_stn_5,grave_top_sculpt_stn_5,Каменная скульптура VI,10,0,0,100,,,10.0000
+surv:grave_top_sculpt_mrb_5,grave_top_sculpt_mrb_5,Мраморная скульптура VI,10,0,0,120,,,12.0000
+surv:blood,blood;blood:blood_2_-1;blood:blood_3_-1;blood:blood_1_0;blood:blood_1_1;blood:blood_1_2;blood:blood_1_3;blood:blood_2_0;blood:blood_2_1;blood:blood_2_2;blood:blood_2_3;blood:blood_3_0;blood:blood_3_1;blood:blood_3_2;blood:blood_3_3;blood:blood_mod,Кровь;Модифицированная кровь;Модифицированная кровь;Модифицированная кровь;Модифицированная кровь;Модифицированная кровь;Модифицированная кровь;Модифицированная кровь;Модифицированная кровь;Модифицированная кровь;Модифицированная кровь;Модифицированная кровь;Модифицированная кровь;Модифицированная кровь;Модифицированная кровь;Кровь,1,0,0,20,,,20.0000
+surv:skull,skull,Череп,1,0,0,20,,,20.0000
+surv:skin,skin;skin:skin_-1_2;skin:skin_-1_3;skin:skin_0_1;skin:skin_0_2;skin:skin_0_3;skin:skin_1_1;skin:skin_1_2;skin:skin_1_3;skin:skin_2_1;skin:skin_2_2;skin:skin_2_3;skin:skin_3_1;skin:skin_3_2;skin:skin_3_3;skin:skin_mod,Кожа;Модифицированная кожа;Модифицированная кожа;Модифицированная кожа;Модифицированная кожа;Модифицированная кожа;Модифицированная кожа;Модифицированная кожа;Модифицированная кожа;Модифицированная кожа;Модифицированная кожа;Модифицированная кожа;Модифицированная кожа;Модифицированная кожа;Модифицированная кожа;Кожа,1,0,0,20,,,20.0000
+surv:fat,fat;fat:fat_2_-1;fat:fat_3_-1;fat:fat_1_0;fat:fat_1_1;fat:fat_1_2;fat:fat_1_3;fat:fat_2_0;fat:fat_2_1;fat:fat_2_2;fat:fat_2_3;fat:fat_3_0;fat:fat_3_1;fat:fat_3_2;fat:fat_3_3;fat:fat_mod,Жир;Модифицированный жир;Модифицированный жир;Модифицированный жир;Модифицированный жир;Модифицированный жир;Модифицированный жир;Модифицированный жир;Модифицированный жир;Модифицированный жир;Модифицированный жир;Модифицированный жир;Модифицированный жир;Модифицированный жир;Модифицированный жир;Жир,1,0,0,20,,,20.0000
+surv:flesh,flesh;flesh:flesh_0_2;flesh:flesh_0_3;flesh:flesh_1_1;flesh:flesh_1_2;flesh:flesh_1_3;flesh:flesh_2_1;flesh:flesh_2_2;flesh:flesh_2_3;flesh:flesh_3_1;flesh:flesh_3_2;flesh:flesh_3_3;flesh:flesh_mod,Мясо;Модифицированное мясо;Модифицированное мясо;Модифицированное мясо;Модифицированное мясо;Модифицированное мясо;Модифицированное мясо;Модифицированное мясо;Модифицированное мясо;Модифицированное мясо;Модифицированное мясо;Модифицированное мясо;Мясо,1,0,0,20,,,20.0000
+surv:bone,bone,Кость,1,0,0,20,,,20.0000
+surv:heart,heart:heart_0_0;heart:heart_1_1;heart:heart_2_-1;heart:heart_0_2;heart:heart_2_0;heart:heart_0_1;heart:heart_2_1;heart:heart_2_2;heart:heart_-2_3;heart:heart_4_1;heart:heart_3_3;heart:heart_0_3;heart:heart_1_0;heart:heart_1_2;heart:heart_1_3;heart:heart_2_3;heart:heart_3_0;heart:heart_3_1;heart:heart_3_2;heart:heart_3_-1;heart:heart_-1_3;heart:heart_4_2;heart:heart_4_3,Сердце;Сердце;Сердце;Сердце;Сердце;Сердце;Сердце;Сердце;Сердце;Сердце;Сердце;Сердце;Сердце;Сердце;Сердце;Сердце;Сердце;Сердце;Сердце;Сердце;Сердце;Сердце;Сердце,3,0,0,50,,,16.6667
+surv:brain,brain:brain_0_0;brain:brain_1_1;brain:brain_2_-1;brain:brain_0_2;brain:brain_2_0;brain:brain_0_1;brain:brain_2_1;brain:brain_2_2;brain:brain_-2_3;brain:brain_4_1;brain:brain_3_3;brain:brain_0_3;brain:brain_1_0;brain:brain_1_2;brain:brain_1_3;brain:brain_2_3;brain:brain_3_0;brain:brain_3_1;brain:brain_3_2;brain:brain_3_-1;brain:brain_-1_3;brain:brain_4_2;brain:brain_4_3,Мозг;Мозг;Мозг;Мозг;Мозг;Мозг;Мозг;Мозг;Мозг;Мозг;Мозг;Мозг;Мозг;Мозг;Мозг;Мозг;Мозг;Мозг;Мозг;Мозг;Мозг;Мозг;Мозг,3,0,0,50,,,16.6667
+surv:intestine,intestine:intestine_0_0;intestine:intestine_1_1;intestine:intestine_2_-1;intestine:intestine_0_2;intestine:intestine_2_0;intestine:intestine_0_1;intestine:intestine_2_1;intestine:intestine_2_2;intestine:intestine_-2_3;intestine:intestine_4_1;intestine:intestine_3_3;intestine:intestine_0_3;intestine:intestine_1_0;intestine:intestine_1_2;intestine:intestine_1_3;intestine:intestine_2_3;intestine:intestine_3_0;intestine:intestine_3_1;intestine:intestine_3_2;intestine:intestine_3_-1;intestine:intestine_-1_3;intestine:intestine_4_2;intestine:intestine_4_3,Кишки;Кишки;Кишки;Кишки;Кишки;Кишки;Кишки;Кишки;Кишки;Кишки;Кишки;Кишки;Кишки;Кишки;Кишки;Кишки;Кишки;Кишки;Кишки;Кишки;Кишки;Кишки;Кишки,3,0,0,50,,,16.6667
+surv:heart_dark,heart_dark,Тёмное сердце,5,0,0,100,,,20.0000
+surv:intestine_dark,intestine_dark,Тёмный кишечник,5,0,0,100,,,20.0000
+surv:brain_dark,brain_dark,Тёмный мозг,5,0,0,100,,,20.0000
+surv:quest_key_astrologer,quest_key_astrologer,Ключ хранителя,2,0,0,10,,,5.0000
+surv:1h_obsidian,1h_obsidian,Обсидиан,4,25,15,100,6.2500,3.7500,25.0000
+surv:dark_gold_cloak,dark_gold_cloak,Чёрно-золотой плащ,4,50,50,50,12.5000,12.5000,12.5000
+surv:funeral_urn_1,funeral_urn_1,Керамическая урна с прахом,2,5,0,30,2.5000,,15.0000
+surv:funeral_urn_2,funeral_urn_2,Фарфоровая урна с прахом,4,10,0,50,2.5000,,12.5000
+surv:zombie_juise,zombie_juise,Экстракт зомби,3,0,10,10,,3.3333,3.3333
+surv:incense_1,incense_1,Благовония,1,5,0,15,5.0000,,15.0000
+surv:incense_2,incense_2,Благовония II,2,15,0,45,7.5000,,22.5000
