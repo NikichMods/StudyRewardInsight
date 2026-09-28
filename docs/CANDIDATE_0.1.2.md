@@ -2,7 +2,7 @@
 
 Target: **Graveyard Keeper 1.407**
 
-Status: **CI-green runtime candidate; real-runtime visual acceptance required before stable promotion**
+Status: **ACCEPTED in real runtime on 2026-09-28; approved for stable promotion**
 
 ## Exact identity
 
@@ -96,3 +96,27 @@ Please inspect:
 5. completed Study remains native if conveniently available.
 
 The most important unknown is purely visual: whether the bundled live font gives the no-break separator a natural-looking gap.
+
+
+## Runtime acceptance — 2026-09-28
+
+The exact handed 0.1.2 binary was exercised in Graveyard Keeper 1.407 with BepInEx 5 in a normal heavily modded save.
+
+Accepted visual evidence covered:
+- Russian ordinary one-group reward rows;
+- Russian multi-color grouped reward rows;
+- Russian alchemy-capability wording and natural wrapping;
+- English ordinary reward rows;
+- English multi-color grouped reward rows;
+- English alchemy-capability wording;
+- the U+00A0 reward-group separator keeping point icon(s) and magnitude together.
+
+Representative screenshots included Stone grave fence II, Maggot, Zombie juice, Green jelly, and their Russian/English equivalents. The resulting centered layout, spacing, grouping and wording were explicitly accepted by the user.
+
+The returned BepInEx log confirms `Study Reward Insight 0.1.2` loaded successfully. A full scan of that log found no SRI warning, exception, unsupported-dynamic-output warning, or tooltip-failure signature. Other Unity/mod warnings and errors in the session are outside SRI and pre-existing/unrelated to the accepted tooltip path.
+
+The same runtime session also exercised language switching across the game's locale set and directly observed `en`, `de`, `fr`, `pt-br`, `es`, `ru`, `it`, `pl`, `ja`, `zh_cn`, and `ko`. This is accepted evidence for the locale identifiers used by the next localization iteration.
+
+No source rebuild is authorized under version 0.1.2. The accepted binary remains:
+- source SHA: `6d24553b1c23071975bb57802867ff9f8b91a855`;
+- DLL SHA-256: `a8497dbb7871f5167b295e8e68417a83411a4b93bb78e00154fbc883876eeac4`.
